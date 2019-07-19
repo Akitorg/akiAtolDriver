@@ -1,0 +1,54 @@
+<resources>
+
+    <string name="app_name">akiAtol</string>
+
+    <!-- Создание кассового документа -->
+    <string name="sum">Сумма</string>
+    <string name="sum_to_pay">К оплате:</string>
+    <string name="reason">Основание</string>
+    <string name="from_who">От кого</string>
+    <string name="to_who">Кому</string>
+    <string name="edit_info">Пожалуйста, заполните все обязательные поля.</string>
+    <string name="close_session">Закрытие смены</string>
+    <string name="in">Внесение</string>
+    <string name="out">Изъятие</string>
+    <string name="close_s">Закрыть смену?</string>
+    <string name="close">Закрыть</string>
+
+    <!-- Добавление товара в чек -->
+    <string name="cancel">Отменить</string>
+    <string name="add">Добавить</string>
+    <string name="price">Цена:</string>
+    <string name="count">Количество</string>
+    <string name="for_1">за 1</string>
+
+    <!-- Печать -->
+    <string name="print_success">Печать прошла успешно</string>
+    <string name="print_no_value">Отсутствует данные для печати</string>
+    <string name="print">Печать</string>
+    <string name="try_again">Повторить</string>
+    <string name="print_exception">Во время печати произошла ошибка</string>
+    <string name="print_in_progress">Идет печать чека</string>
+    <string name="incorrect_summ">Введена некорректная сумма!</string>
+
+    <!-- Настройки -->
+    <string name="prefs_kkm_use_10_driver">prefs_kkm_use_10_driver</string>
+    <string name="prefs_kkm_use_avans">prefs_kkm_use_avanst</string>
+    <string name="prefs_kkm_use_pre_payment">prefs_kkm_use_pre_payment</string>
+    <string name="prefs_kkm_use_combo_payment">prefs_kkm_use_combo_payment</string>
+    <string name="prefs_kkm_emulate">prefs_kkm_emulate</string>
+    <string name="prefs_user_name">prefs_user_name</string>
+    <string name="prefs_user_inn">prefs_user_inn</string>
+    <string name="prefs_kkm_empty_mail">prefs_kkm_empty_mail</string>
+    <string name="prefs_kkm_default_mail">prefs_kkm_default_mail</string>
+    <string name="prefs_kkm_debug">prefs_kkm_debug</string>
+    <string name="prefs_login">prefs_login</string>
+    <string name="grant_vat">grant_vat</string>
+    <string name="grant_sno">grant_sno</string>
+
+    <!-- Период -->
+    <string name="tab_today">Сегодня</string>
+    <string name="tab_week">Неделя</string>
+    <string name="tab_all">Все время</string>
+
+</resources>

@@ -1,0 +1,29 @@
+<resources  xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Кнопки -->
+    <dimen name="plusButtonSize">76dp</dimen>
+    <dimen name="ButtonCashNumber">60dp</dimen>
+    <dimen name="ButtonCashNumberMiddle">86dp</dimen>
+    <dimen name="ButtonCashNumberLong">128dp</dimen>
+
+    <!-- Размер текста -->
+    <dimen name="TextSizeSmall">8sp</dimen>
+    <dimen name="TextSizeMiddle">14sp</dimen>
+    <dimen name="TextSizeMA">16sp</dimen>
+    <dimen name="TextSizeAverage">20sp</dimen>
+    <dimen name="TextSizeBA">28sp</dimen>
+    <dimen name="TextSizeBig">36sp</dimen>
+    <dimen name="TextSizeLarge">42sp</dimen>
+
+    <!-- Отступы -->
+    <dimen name="MarginSmall">4sp</dimen>
+    <dimen name="MarginMiddle">8sp</dimen>
+    <dimen name="MarginAverage">12sp</dimen>
+    <dimen name="MarginBig">16sp</dimen>
+    <dimen name="MarginLarge">44sp</dimen>
+    <dimen name="MarginPlusButton">32sp</dimen>
+
+    <!-- Изображения -->
+    <dimen name="design_navigation_icon_size" tools:override="true">30dp</dimen>
+
+</resources>

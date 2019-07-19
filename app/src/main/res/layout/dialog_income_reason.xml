@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/MarginSmall"
+    android:background="@color/bg_main"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/MarginAverage"
+        android:layout_marginTop="@dimen/MarginMiddle"
+        android:text="@string/reason"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/TextSizeMA" />
+
+    <EditText
+        android:id="@+id/et_reason"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/MarginMiddle"
+        android:ems="10"
+        android:hint="@string/reason"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/txt_date"
+        android:textSize="@dimen/TextSizeMiddle" />
+
+    <TextView
+        android:id="@+id/tv_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/MarginAverage"
+        android:layout_marginTop="@dimen/MarginMiddle"
+        android:text="@string/from_who"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/TextSizeMA" />
+
+    <EditText
+        android:id="@+id/et_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/MarginMiddle"
+        android:ems="10"
+        android:hint="@string/from_who"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/txt_date"
+        android:textSize="@dimen/TextSizeMiddle" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/MarginAverage"
+        android:layout_marginTop="@dimen/MarginMiddle"
+        android:text="@string/sum"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/TextSizeMA" />
+
+    <EditText
+        android:id="@+id/et_sum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/MarginMiddle"
+        android:layout_marginStart="@dimen/MarginMiddle"
+        android:ems="10"
+        android:hint="0"
+        android:inputType="numberDecimal"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/txt_date"
+        android:textSize="@dimen/TextSizeMiddle" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/MarginMiddle"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="@dimen/ButtonCashNumberLong"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="@string/cancel"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/TextSizeMiddle" />
+
+        <Button
+            android:id="@+id/btn_add"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="@dimen/ButtonCashNumberLong"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_add_to_cheque"
+            android:text="@string/add"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/TextSizeMA" />
+    </LinearLayout>
+</LinearLayout>

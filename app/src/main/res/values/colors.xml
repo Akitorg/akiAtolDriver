@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="blue_grey_500">#607D8B</color>
+    <color name="blue_grey_600">#546E7A</color>
+    <color name="blue_grey_700">#455A64</color>
+    <color name="blue_grey_800">#37474F</color>
+    <color name="blue_grey_900">#263238</color>
+
+    <color name="bg_main">#022B5C</color>
+    <color name="bg_title">#015091</color>
+    <color name="bg_good_head">#3D5F87</color>
+    <color name="btn_demo">#0076C8</color>
+    <color name="btn_enter">#3DA7FD</color>
+    <color name="btn_doc">#0076C8</color>
+    <color name="btn_cheque">#21B1EE</color>
+    <color name="btn_count_dark">#133866</color>
+    <color name="btn_count">#02497B</color>
+    <color name="btn_circle">#0076C3</color>
+    <color name="txt_date">#A0A0A0</color>
+    <color name="txt_time">#A8A8A8</color>
+    <color name="txt_pr_good">#92A5BC</color>
+
+</resources>

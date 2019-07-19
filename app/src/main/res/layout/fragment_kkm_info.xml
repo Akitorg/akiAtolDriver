@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/MarginMiddle"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="Информация по кассе"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/MarginMiddle"
+                android:layout_weight="1"
+                android:text="Денег в кассе"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvCashSum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/MarginMiddle"
+                android:layout_weight="1"
+                android:text="-"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvSell"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/MarginMiddle"
+                android:layout_weight="1"
+                android:text="Продажи" />
+
+            <TextView
+                android:id="@+id/tvReturn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/MarginMiddle"
+                android:layout_weight="1"
+                android:text="Возвраты" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvIncome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/MarginMiddle"
+                android:layout_weight="1"
+                android:text="Внесения" />
+
+            <TextView
+                android:id="@+id/tvOutcome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/MarginMiddle"
+                android:layout_weight="1"
+                android:text="Изъятия" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/MarginMiddle"
+                android:layout_weight="1"
+                android:text="ОФД" />
+
+            <TextView
+                android:id="@+id/tvOfd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/MarginMiddle"
+                android:layout_weight="1"
+                android:text="-" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_check_ofd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/MarginAverage"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:gravity="left|center_vertical"
+            android:text="Проверить связь с ОФД"
+            android:textColor="@color/btn_circle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/MarginMiddle"
+            android:layout_weight="1"
+            android:background="@android:color/holo_green_light"
+            android:text="Открыть смену" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/MarginMiddle"
+        android:text="Кассовые операции"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_income"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/MarginMiddle"
+            android:layout_weight="1"
+            android:background="@android:color/holo_green_light"
+            android:text="+ Внесение" />
+
+        <Button
+            android:id="@+id/btn_outcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/MarginMiddle"
+            android:layout_weight="1"
+            android:background="?attr/colorError"
+            android:text="- Изъятие" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/MarginMiddle"
+            android:layout_marginEnd="@dimen/MarginMiddle"
+            android:layout_weight="1"
+            android:text="Журнал" />
+
+        <Button
+            android:id="@+id/btn_x"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/MarginMiddle"
+            android:layout_marginEnd="@dimen/MarginMiddle"
+            android:layout_weight="1"
+            android:text="X отчет" />
+
+        <Button
+            android:id="@+id/btn_correction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/MarginMiddle"
+            android:layout_marginEnd="@dimen/MarginMiddle"
+            android:layout_weight="1"
+            android:text="Чек коррекции" />
+    </LinearLayout>
+</LinearLayout>
