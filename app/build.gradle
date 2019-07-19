@@ -4,8 +4,9 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 28
+    publishNonDefault true
     defaultConfig {
-        applicationId "com.ex.akiatol"
+
         minSdkVersion 17
         targetSdkVersion 28
         versionCode 1
@@ -24,4 +25,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar','*.so','*.aar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.0.2'
+}
+
+repositories {
+    mavenCentral()
 }
