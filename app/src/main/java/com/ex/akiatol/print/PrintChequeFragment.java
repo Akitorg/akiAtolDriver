@@ -18,7 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import com.ex.akiatol.Const;
 import com.ex.akiatol.R;
 
 import java.util.ArrayList;
@@ -286,8 +285,8 @@ abstract public class PrintChequeFragment extends Fragment implements PrintRespo
         }
     });
 
-    abstract boolean onPrintDone();
-    abstract void sendDebugLogs();
+    abstract public boolean onPrintDone();
+    abstract public void sendDebugLogs();
 
 }
 //© Все права на распостранение и модификацию модуля принадлежат ООО "АКИП" (www.akitorg.ru)
