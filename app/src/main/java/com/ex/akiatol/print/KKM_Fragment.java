@@ -137,58 +137,52 @@ public class KKM_Fragment extends Fragment implements View.OnClickListener {
         Bundle bundle = new Bundle();
         bundle.clear();
 
-        switch (v.getId()) {
-            case R.id.btn_income:
+        if (v.getId() == R.id.btn_income) {
 
-                new CashOperationDialog(getActivity(), CashOperationDialog.OperationType.INCOME, null).show();
+            new CashOperationDialog(getActivity(), CashOperationDialog.OperationType.INCOME, null).show();
 
-                break;
-            case R.id.btn_outcome:
+        } else if(v.getId() == R.id.btn_outcome) {
 
-                new CashOperationDialog(getActivity(), CashOperationDialog.OperationType.OUTCOME, null).show();
+            new CashOperationDialog(getActivity(), CashOperationDialog.OperationType.OUTCOME, null).show();
 
-                break;
-            case R.id.btn_x:
+        } else if(v.getId() == R.id.btn_x) {
 
-                bundle.putSerializable("printType", PrintChequeFragment.PrintType.XREP);
-                bundle.putSerializable("printObject", new PrintObjects.XRep());
+            bundle.putSerializable("printType", PrintChequeFragment.PrintType.XREP);
+            bundle.putSerializable("printObject", new PrintObjects.XRep());
+
+            fragment.setArguments(bundle);
+
+            getActivity().getSupportFragmentManager().beginTransaction().replace(PrintChequeFragment.getContentFrame(),
+                    fragment, "KKM_Fragment").addToBackStack(null).commit();
+
+        } else if(v.getId() == R.id.btn_open) {
+
+            if (kkm_information[0] != null && kkm_information[0].shiftState != LIBFPTR_SS_CLOSED) {
+
+                bundle.putSerializable("printType", PrintChequeFragment.PrintType.ZREP);
+                bundle.putSerializable("printObject", new PrintObjects.ZRep());
 
                 fragment.setArguments(bundle);
 
                 getActivity().getSupportFragmentManager().beginTransaction().replace(PrintChequeFragment.getContentFrame(),
                         fragment, "KKM_Fragment").addToBackStack(null).commit();
 
-                break;
-            case R.id.btn_open:
+            } else {
 
-                if (kkm_information[0] != null && kkm_information[0].shiftState != LIBFPTR_SS_CLOSED) {
+                bundle.putSerializable("printType", PrintChequeFragment.PrintType.OPEN_SESSION);
+                bundle.putSerializable("printObject", new PrintObjects.OPEN_SEESION());
 
-                    bundle.putSerializable("printType", PrintChequeFragment.PrintType.ZREP);
-                    bundle.putSerializable("printObject", new PrintObjects.ZRep());
+                fragment.setArguments(bundle);
 
-                    fragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(PrintChequeFragment.getContentFrame(),
+                        fragment, "KKM_Fragment").addToBackStack(null).commit();
 
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(PrintChequeFragment.getContentFrame(),
-                            fragment, "KKM_Fragment").addToBackStack(null).commit();
+            }
 
-                } else {
+        } else if (v.getId() == R.id.btn_correction) {
 
-                    bundle.putSerializable("printType", PrintChequeFragment.PrintType.OPEN_SESSION);
-                    bundle.putSerializable("printObject", new PrintObjects.OPEN_SEESION());
+            print_correction();
 
-                    fragment.setArguments(bundle);
-
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(PrintChequeFragment.getContentFrame(),
-                            fragment, "KKM_Fragment").addToBackStack(null).commit();
-
-                }
-
-                break;
-            case R.id.btn_correction:
-
-                print_correction();
-
-                break;
         }
     }
 
