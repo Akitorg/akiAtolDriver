@@ -7,15 +7,8 @@ import android.text.Html;
 import android.text.Spanned;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.EditText;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -48,18 +41,6 @@ public abstract class Const {
         });
     }
 
-    public static void rotateAnim(View v) {
-        RotateAnimation rAnim = new RotateAnimation(0.0f, 90.0f,
-                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
-                0.5f);
-        //rAnim.setRepeatMode(Animation.);
-        rAnim.setRepeatCount(1);
-        rAnim.setInterpolator(new LinearInterpolator());
-        rAnim.setDuration(100L);
-
-        v.startAnimation(rAnim);
-    }
-
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
 
@@ -71,14 +52,6 @@ public abstract class Const {
 
     public static double countDiscout(double price, double discount) {
         return round(price - price * discount / 100, 2);
-    }
-
-    public static double countSum(double price, double count, double discount) {
-        return countDiscout(price * count, discount);
-    }
-
-    public static double countVat(double sum, double vat) {
-        return round((sum * vat / (100 + vat)), 2);
     }
 
     static Spanned priceDouble(Double price) {
@@ -104,17 +77,6 @@ public abstract class Const {
         editText.setKeyListener(null);
         editText.setTextColor(Color.GRAY);
         editText.setBackgroundColor(Color.TRANSPARENT);
-    }
-
-    public static String getDateTimeSQL() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-        Date date = new Date();
-        return dateFormat.format(date);
-    }
-
-    static String getDateString(final Calendar cal) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-        return dateFormat.format(cal.getTime());
     }
 
     @SuppressWarnings("deprecation")

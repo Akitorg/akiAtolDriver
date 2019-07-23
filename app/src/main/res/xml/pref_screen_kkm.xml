@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:key="pref_key_kkm_sett"
+        android:layout="@layout/pref_title_tv"
+        android:title="Касса">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/prefs_kkm_use_10_driver"
+            android:summary="Использовать новую версию драйвера Атол"
+            android:title="Драйвер v.10"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:key="pref_key_kkm_settings"
+            android:title="Настройки подключения ККМ"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:key="pref_key_kkm_send_log"
+            android:title="Отправить лог кассы разработчикам"
+            app:iconSpaceReserved="false" />
+        <EditTextPreference
+            android:key="@string/prefs_user_name"
+            android:title="Имя кассира"
+            app:iconSpaceReserved="false" />
+        <EditTextPreference
+            android:key="@string/prefs_user_inn"
+            android:title="ИНН кассира"
+            app:iconSpaceReserved="false" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/prefs_kkm_use_avans"
+            android:summary="Разрешить авансовые платежи"
+            android:title="Использовать аванс"
+            app:iconSpaceReserved="false" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/prefs_kkm_use_pre_payment"
+            android:summary="Разрешить частичную предоплату"
+            android:title="Использовать предоплату"
+            app:iconSpaceReserved="false" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/prefs_kkm_use_combo_payment"
+            android:summary="Принимать одновременно нал/б.нал. расчет"
+            android:title="Использовать комбооплату"
+            app:iconSpaceReserved="false" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/prefs_kkm_emulate"
+            android:summary="Не использовать реальную кассу"
+            android:title="Эмулятор Кассы"
+            app:iconSpaceReserved="false" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/prefs_kkm_debug"
+            android:summary="Для диагностирования неисправностей"
+            android:title="Режим отладки"
+            app:iconSpaceReserved="false" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/prefs_kkm_empty_mail"
+            android:title="E-mail по умолчанию"
+            app:iconSpaceReserved="false" />
+        <EditTextPreference
+            android:key="@string/prefs_kkm_default_mail"
+            android:title="Указать e-mail"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

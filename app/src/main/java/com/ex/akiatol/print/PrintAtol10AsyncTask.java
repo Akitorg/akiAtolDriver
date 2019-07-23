@@ -16,7 +16,7 @@ import java.util.Locale;
 
 import static com.ex.akiatol.Const.round;
 import static com.ex.akiatol.print.ChequeType.FULL_PAY;
-import static com.ex.akiatol.print.PrintChequeFragment.PrintType.*;
+import static com.ex.akiatol.print.PrintType.*;
 import static ru.atol.drivers10.fptr.IFptr.LIBFPTR_SS_CLOSED;
 import static ru.atol.drivers10.fptr.IFptr.LIBFPTR_SS_EXPIRED;
 
@@ -28,7 +28,7 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
 
     private WeakReference<Context> contextWeakReference;
 
-    private PrintChequeFragment.PrintType printType;
+    private PrintType printType;
     private HashMap<Integer, PrintObjects> printObjectsSNO;
     private IFptr fptr;
 
@@ -39,7 +39,7 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
     private PrintResponseListener printResponseListener;
 
     public PrintAtol10AsyncTask(HashMap<Integer, PrintObjects> printObjectsSNO,
-                                PrintChequeFragment.PrintType printType, Context context) {
+                                PrintType printType, Context context) {
 
         this.printType = printType;
         this.printObjectsSNO = printObjectsSNO;
@@ -425,7 +425,7 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
             return new PrintResult(result);
     }
 
-    static KKM_Information getKKMInformation(Context context) throws Exception {
+    public static KKM_Information getKKMInformation(Context context) throws Exception {
 
         Fptr fptr = new Fptr(context);
 

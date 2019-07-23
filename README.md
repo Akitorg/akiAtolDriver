@@ -42,10 +42,20 @@ Step 2. Add the dependency
     
 ### Using
 
-First of all we need to create Fragment that extends <b>PrintChequeFragment</b> to save part realisation
+Step 1. First of all we need to create Fragment that extends <b>PrintChequeFragment</b> to save part realisation
 
-	<dependency>
-        <groupId>com.github.Akitorg</groupId>
-        <artifactId>akiAtolDriver</artifactId>
-        <version>-SNAPSHOT</version>
-    </dependency>
+	public class PrintFragment extends PrintChequeFragment {
+    
+        @Override
+        public boolean onPrintDone() {
+            return false;
+        }
+    
+        @Override
+        public void sendDebugLogs() {
+    
+        }
+    
+    }
+    
+ Step 2. Set constants for correct lib work.  

@@ -1,8 +1,9 @@
 package com.ex.akiatol;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.os.Bundle;
+import android.content.Intent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -10,10 +11,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import com.ex.akiatol.print.PrintChequeFragment;
+import com.ex.akiatol.print.CashOperation;
 import com.ex.akiatol.print.PrintObjects;
+import com.ex.akiatol.print.PrintType;
+
+import static com.ex.akiatol.PrintChequeActivity.PRINT_RESPONSE_CODE;
 
 /**
  * Created by Leo on 12/04/2019.
@@ -86,22 +88,17 @@ public class CashOperationDialog extends Dialog {
                         return;
                     }
 
-                    Bundle bundle = new Bundle();
+                    Intent intent = new Intent(context, PrintChequeActivity.class);
 
                     if (operationType == CashOperationDialog.OperationType.INCOME)
-                        bundle.putSerializable("printType", PrintChequeFragment.PrintType.INCOME);
+                        intent.putExtra("printType", PrintType.INCOME);
                     else
-                        bundle.putSerializable("printType", PrintChequeFragment.PrintType.OUTCOME);
+                        intent.putExtra("printType", PrintType.OUTCOME);
 
-                    bundle.putSerializable("printObject", new PrintObjects.InOutcome(summ,
+                    intent.putExtra("printObject", new PrintObjects.InOutcome(summ,
                             et_reason.getText().toString(), et_person.getText().toString()));
 
-                    Fragment fragment = PrintChequeFragment.getFragment();
-                    fragment.setArguments(bundle);
-
-                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(PrintChequeFragment.getContentFrame(),
-                            fragment, "KKM_Fragment").addToBackStack(null).commit();
-
+                    ((Activity) context).startActivityForResult(intent, PRINT_RESPONSE_CODE);
 
                     dismiss();
                 }
@@ -111,20 +108,6 @@ public class CashOperationDialog extends Dialog {
 
         Const.buttonEffect(findViewById(R.id.btn_cancel));
         Const.buttonEffect(findViewById(R.id.btn_add));
-
-    }
-
-    public class CashOperation {
-
-        String reason;
-        String person;
-        String dsum;
-
-        public CashOperation (String reason, String person, String dsum) {
-            this.reason = reason;
-            this.person = person;
-            this.dsum = dsum;
-        }
 
     }
 

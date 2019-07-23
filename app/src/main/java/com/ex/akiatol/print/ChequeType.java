@@ -1,11 +1,13 @@
 package com.ex.akiatol.print;
 
+import java.io.Serializable;
+
 /**
  * Тип чека для печати
  * Created by Leo on 24.08.2018.
  */
 
-public enum ChequeType {
+public enum ChequeType implements Serializable {
 
     FULL_PAY, // Обычная оплата
     FULL_PRE_PAY, // Предоплата 100%

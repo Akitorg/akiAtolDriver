@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/background"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:attr/background"
         android:orientation="horizontal">
 
         <TextView
@@ -16,12 +19,14 @@
             android:layout_weight="1"
             android:gravity="end"
             android:text="Информация по кассе"
+            android:textColor="?android:attr/textColor"
             android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:attr/background"
         android:orientation="vertical">
 
         <LinearLayout
@@ -35,6 +40,7 @@
                 android:layout_margin="@dimen/MarginMiddle"
                 android:layout_weight="1"
                 android:text="Денег в кассе"
+                android:textColor="?android:attr/textColor"
                 android:textStyle="bold" />
 
             <TextView
@@ -44,6 +50,7 @@
                 android:layout_margin="@dimen/MarginMiddle"
                 android:layout_weight="1"
                 android:text="-"
+                android:textColor="?android:attr/textColor"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -58,7 +65,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/MarginMiddle"
                 android:layout_weight="1"
-                android:text="Продажи" />
+                android:text="Продажи"
+                android:textColor="?android:attr/textColor" />
 
             <TextView
                 android:id="@+id/tvReturn"
@@ -66,7 +74,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/MarginMiddle"
                 android:layout_weight="1"
-                android:text="Возвраты" />
+                android:text="Возвраты"
+                android:textColor="?android:attr/textColor" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,7 +89,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/MarginMiddle"
                 android:layout_weight="1"
-                android:text="Внесения" />
+                android:text="Внесения"
+                android:textColor="?android:attr/textColor" />
 
             <TextView
                 android:id="@+id/tvOutcome"
@@ -88,7 +98,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/MarginMiddle"
                 android:layout_weight="1"
-                android:text="Изъятия" />
+                android:text="Изъятия"
+                android:textColor="?android:attr/textColor" />
         </LinearLayout>
 
         <LinearLayout
@@ -101,7 +112,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/MarginMiddle"
                 android:layout_weight="1"
-                android:text="ОФД" />
+                android:text="ОФД"
+                android:textColor="?android:attr/textColor" />
 
             <TextView
                 android:id="@+id/tvOfd"
@@ -109,13 +121,15 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/MarginMiddle"
                 android:layout_weight="1"
-                android:text="-" />
+                android:text="-"
+                android:textColor="?android:attr/textColor" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:attr/background"
         android:orientation="horizontal">
 
         <Button
@@ -127,12 +141,13 @@
             android:background="@android:color/transparent"
             android:gravity="left|center_vertical"
             android:text="Проверить связь с ОФД"
-            android:textColor="@color/btn_circle" />
+            android:textColor="?android:attr/textColor" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:attr/background"
         android:orientation="horizontal">
 
         <Button
@@ -156,6 +171,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:attr/background"
         android:orientation="horizontal">
 
         <Button
@@ -165,7 +181,8 @@
             android:layout_margin="@dimen/MarginMiddle"
             android:layout_weight="1"
             android:background="@android:color/holo_green_light"
-            android:text="+ Внесение" />
+            android:text="+ Внесение"
+            android:textColor="@color/bg_main" />
 
         <Button
             android:id="@+id/btn_outcome"
@@ -174,12 +191,14 @@
             android:layout_margin="@dimen/MarginMiddle"
             android:layout_weight="1"
             android:background="?attr/colorError"
-            android:text="- Изъятие" />
+            android:text="- Изъятие"
+            android:textColor="@color/bg_main" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:attr/background"
         android:orientation="vertical">
 
         <Button
@@ -189,7 +208,8 @@
             android:layout_marginStart="@dimen/MarginMiddle"
             android:layout_marginEnd="@dimen/MarginMiddle"
             android:layout_weight="1"
-            android:text="Журнал" />
+            android:text="Журнал"
+            android:textColor="@color/bg_main" />
 
         <Button
             android:id="@+id/btn_x"
@@ -198,7 +218,8 @@
             android:layout_marginStart="@dimen/MarginMiddle"
             android:layout_marginEnd="@dimen/MarginMiddle"
             android:layout_weight="1"
-            android:text="X отчет" />
+            android:text="X отчет"
+            android:textColor="@color/bg_main" />
 
         <Button
             android:id="@+id/btn_correction"
@@ -207,6 +228,7 @@
             android:layout_marginStart="@dimen/MarginMiddle"
             android:layout_marginEnd="@dimen/MarginMiddle"
             android:layout_weight="1"
-            android:text="Чек коррекции" />
+            android:text="Чек коррекции"
+            android:textColor="@color/bg_main" />
     </LinearLayout>
 </LinearLayout>

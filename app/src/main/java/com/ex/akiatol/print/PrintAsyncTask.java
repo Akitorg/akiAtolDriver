@@ -57,7 +57,7 @@ public abstract class PrintAsyncTask extends AsyncTask<String, String, PrintResu
                                    int taxNumber, ChequeType chequeType, String type, double discount,
                                    boolean isImport, String country, String decNumber) throws Exception;
 
-    void registerPositions(PrintObjects.Order orderObject, PrintChequeFragment.PrintType printType) throws Exception {
+    void registerPositions(PrintObjects.Order orderObject, PrintType printType) throws Exception {
 
         double positions_sum = 0;
 
@@ -69,7 +69,7 @@ public abstract class PrintAsyncTask extends AsyncTask<String, String, PrintResu
             int tax_vat = getVat(item.vat_sum, item.vat);
 
             double position_sum;
-            boolean isCombo = printType == PrintChequeFragment.PrintType.ORDER_COMBO;
+            boolean isCombo = printType == PrintType.ORDER_COMBO;
             if (isCombo) {
                 position_sum = round(item.price * item.count, 2);
             } else {
@@ -79,11 +79,11 @@ public abstract class PrintAsyncTask extends AsyncTask<String, String, PrintResu
             //Подсчет скидки
             double discount = 0;
             if (item.discount > 0) {
-                discount = round(item.discount*position_sum/100, 2);
+                discount = round(item.discount * position_sum / 100, 2);
                 position_sum = round(position_sum - discount, 2);
             }
 
-            double position_price = round(position_sum/item.count, 2);
+            double position_price = round(position_sum / item.count, 2);
 
             if (orderObject.type == ChequeType.CHECK_OF_SHIPMENT || orderObject.type == ChequeType.PART_PRE_PAY) {
                 item.name = "Предоплата за " + item.name;
@@ -133,7 +133,7 @@ public abstract class PrintAsyncTask extends AsyncTask<String, String, PrintResu
             return true;
 
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String l_date = Const.encode(prefs.getString("sjt", ""),"sjt");
+        String l_date = Const.encode(prefs.getString("sjt", ""), "sjt");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         try {
             Date date = format.parse(l_date);

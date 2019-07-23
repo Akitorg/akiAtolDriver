@@ -17,7 +17,7 @@ public abstract class WaitTask extends AsyncTask<String, String, String> {
 	
 	private ProgressDialog pd;
 	
-	protected WaitTask(ProgressDialog pd) {
+	WaitTask(ProgressDialog pd) {
 		this.pd = pd;
 	}
 	

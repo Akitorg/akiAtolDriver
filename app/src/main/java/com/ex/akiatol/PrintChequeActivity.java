@@ -1,24 +1,22 @@
-package com.ex.akiatol.print;
+package com.ex.akiatol;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import com.ex.akiatol.R;
+import com.ex.akiatol.print.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,60 +31,51 @@ import static com.ex.akiatol.print.PrintResult.STATUS_ERROR;
  */
 
 @SuppressLint("UseSparseArrays")
-abstract public class PrintChequeFragment extends Fragment implements PrintResponseListener {
-
-    private static PrintChequeFragment fragment;
-    public void setFragment(PrintChequeFragment fragment){
-        this.fragment = fragment;
-    }
-    public static PrintChequeFragment getFragment() {
-        return fragment;
-    }
-
-    private static int CONTENT_FRAME = 0;
-    public static void setContentFrame(int i) {
-        CONTENT_FRAME = i;
-    }
-    public static int getContentFrame() {
-        return CONTENT_FRAME;
-    }
-
-    public enum PrintType {
-        ORDER_CASH, ORDER_CARD, RETORDER_CARD, RETORDER_CASH, INCOME, OUTCOME, ZREP, XREP, CORRECTION, OPEN_SESSION, ORDER_COMBO
-    }
+public class PrintChequeActivity extends Activity implements PrintResponseListener {
 
     private PrintType printType;
     private HashMap<Integer, PrintObjects> printObjectsSNO = new HashMap<>();
 
-    private View rootView;
+    public static final int PRINT_RESPONSE_CODE = 1021;
 
-    @Nullable
+    private static int theme = R.style.AppTheme;
+    public static void setDarkTheme() { theme = R.style.AtolThemeDark; }
+    public static void setLightTheme() { theme = R.style.AppTheme; }
+    public static int getAppTheme() { return theme; }
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+
+        setTheme(theme);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.fragment_print);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         PrintObjects printObject = null;
 
-        if (getArguments()!= null) {
+        Bundle extras = getIntent().getExtras();
+        if ( extras != null) {
 
-            printType = (PrintType) getArguments().getSerializable("printType");
-            printObject = (PrintObjects) getArguments().getSerializable("printObject");
+            printType = (PrintType) extras.getSerializable("printType");
+            printObject = (PrintObjects) extras.getSerializable("printObject");
 
-            getArguments().remove("printType");
-            getArguments().remove("printObject");
+            extras.remove("printType");
+            extras.remove("printObject");
         }
 
         if (printType == null || printObject == null) {
 
-            Toast.makeText(getContext(), R.string.print_no_value, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.print_no_value, Toast.LENGTH_SHORT).show();
 
             if (getFragmentManager() != null) {
                 getFragmentManager().popBackStack();
             }
         }
 
-        rootView = inflater.inflate(R.layout.fragment_print, container, false);
-
-        final ImageView img_animation = rootView.findViewById(R.id.img_cheque);
+       final ImageView img_animation = findViewById(R.id.img_cheque);
 
         final TranslateAnimation animation = new TranslateAnimation(0.0f, 0.0f,
                 0.0f, -1000.0f);          //  new TranslateAnimation(xFrom,xTo, yFrom,yTo)
@@ -95,42 +84,36 @@ abstract public class PrintChequeFragment extends Fragment implements PrintRespo
 
         img_animation.startAnimation(animation);
 
-        rootView.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (getFragmentManager() != null)
-                    getFragmentManager().popBackStack();
+                finish();
             }
         });
 
-        rootView.findViewById(R.id.btn_try_again).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_try_again).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Context context = getContext();
-                if (context == null)
-                    return;
+                findViewById(R.id.ll_error).setVisibility(View.GONE);
+                findViewById(R.id.tv_error).setVisibility(View.GONE);
 
-                rootView.findViewById(R.id.ll_error).setVisibility(View.GONE);
-                rootView.findViewById(R.id.tv_error).setVisibility(View.GONE);
+                ((TextView) findViewById(R.id.tv_title)).setText(R.string.print_in_progress);
+                ((TextView) findViewById(R.id.tv_title)).setTextColor(ContextCompat.getColor(PrintChequeActivity.this, R.color.bg_title));
 
-                ((TextView)rootView.findViewById(R.id.tv_title)).setText(R.string.print_in_progress);
-                ((TextView)rootView.findViewById(R.id.tv_title)).setTextColor(ContextCompat.getColor(context, R.color.bg_title));
-
-                boolean isAtol10 = PreferenceManager.getDefaultSharedPreferences(getContext())
+                boolean isAtol10 = PreferenceManager.getDefaultSharedPreferences(PrintChequeActivity.this)
                         .getBoolean(getString(R.string.prefs_kkm_use_10_driver), true);
 
                 PrintAsyncTask printTask;
                 if (isAtol10)
-                    printTask = new PrintAtol10AsyncTask(printObjectsSNO, printType, getContext());
+                    printTask = new PrintAtol10AsyncTask(printObjectsSNO, printType, PrintChequeActivity.this);
                 else
-                    return;
-                    //printTask = new PrintAtol9AsyncTask(printObjectsSNO, printType, getContext());
+                    printTask = new PrintAtol9AsyncTask(printObjectsSNO, printType, PrintChequeActivity.this);
 
-                printTask.setListener(PrintChequeFragment.this);
+                printTask.setListener(PrintChequeActivity.this);
                 printTask.execute();
 
-                img_animation.startAnimation(animation);
+                //img_animation.startAnimation(animation);
             }
         });
 
@@ -140,7 +123,7 @@ abstract public class PrintChequeFragment extends Fragment implements PrintRespo
             PrintObjects.OrderGood[] goods = ((PrintObjects.Order) printObject).goods;
 
             //don't use vat
-            if (!PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean(getString(R.string.grant_vat), true)) {
+            if (!PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.grant_vat), true)) {
                 for (PrintObjects.OrderGood g: goods) {
                     g.vat = 0;
                     g.vat_sum = 0;
@@ -148,7 +131,7 @@ abstract public class PrintChequeFragment extends Fragment implements PrintRespo
             }
 
             //slice by sno
-            if (PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean(getString(R.string.grant_sno), false)) {
+            if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.grant_sno), false)) {
 
                 HashMap<Integer, ArrayList<PrintObjects.OrderGood>> sno_good = new HashMap<>();
 
@@ -207,19 +190,14 @@ abstract public class PrintChequeFragment extends Fragment implements PrintRespo
         //send debug logs
         sendDebugLogs();
 
-        return rootView;
     }
 
     @Override
     public void onStart() {
         super.onStart();
 
-        Context context = getContext();
-        if (context == null)
-            return;
-
-        boolean emulate_kkm = PreferenceManager.getDefaultSharedPreferences(getContext())
-                .getBoolean(context.getString(R.string.prefs_kkm_emulate), false);
+        boolean emulate_kkm = PreferenceManager.getDefaultSharedPreferences(this)
+                .getBoolean(getString(R.string.prefs_kkm_emulate), false);
 
         if (emulate_kkm) {
 
@@ -229,15 +207,14 @@ abstract public class PrintChequeFragment extends Fragment implements PrintRespo
 
         } else {
 
-            boolean isAtol10 = PreferenceManager.getDefaultSharedPreferences(getContext())
+            boolean isAtol10 = PreferenceManager.getDefaultSharedPreferences(this)
                     .getBoolean(getString(R.string.prefs_kkm_use_10_driver), true);
 
             PrintAsyncTask printTask;
             if (isAtol10)
-                printTask = new PrintAtol10AsyncTask(printObjectsSNO, printType, getContext());
+                printTask = new PrintAtol10AsyncTask(printObjectsSNO, printType, PrintChequeActivity.this);
             else
-                return;
-            //printTask = new PrintAtol9AsyncTask(printObjectsSNO, printType, getContext());
+                printTask = new PrintAtol9AsyncTask(printObjectsSNO, printType, PrintChequeActivity.this);
 
             printTask.setListener(this);
             printTask.execute();
@@ -248,7 +225,7 @@ abstract public class PrintChequeFragment extends Fragment implements PrintRespo
 
     @Override
     public void onUpdateListener(String... values) {
-        ((TextView) rootView.findViewById(R.id.tv_title)).setText(values[0]);
+        ((TextView) findViewById(R.id.tv_title)).setText(values[0]);
     }
 
     @Override
@@ -264,29 +241,52 @@ abstract public class PrintChequeFragment extends Fragment implements PrintRespo
 
         @Override
         public boolean handleMessage(Message msg) {
-            switch (msg.what) {
-                case STATUS_DONE:
-                    onPrintDone();
 
+            switch (msg.what) {
+
+                case STATUS_DONE:
+
+                    onPrintDone(msg);
+
+                    break;
                 case STATUS_ERROR:
 
-                    rootView.findViewById(R.id.ll_error).setVisibility(View.VISIBLE);
-                    rootView.findViewById(R.id.tv_error).setVisibility(View.VISIBLE);
-                    ((TextView) rootView.findViewById(R.id.tv_error)).setText(String.valueOf(msg.obj));
-                    ((TextView) rootView.findViewById(R.id.tv_title)).setText(getString(R.string.print_exception));
-                    ((TextView) rootView.findViewById(R.id.tv_title)).setTextColor(Color.RED);
-                    rootView.findViewById(R.id.img_cheque).clearAnimation();
+                    findViewById(R.id.ll_error).setVisibility(View.VISIBLE);
+                    findViewById(R.id.tv_error).setVisibility(View.VISIBLE);
+
+                    ((TextView) findViewById(R.id.tv_error)).setText(String.valueOf(msg.obj));
+                    ((TextView) findViewById(R.id.tv_title)).setText(getString(R.string.print_exception));
+                    ((TextView) findViewById(R.id.tv_title)).setTextColor(Color.RED);
+
+                    findViewById(R.id.img_cheque).clearAnimation();
 
                     break;
                 default:
                     break;
             }
+
             return true;
         }
     });
 
-    abstract public boolean onPrintDone();
-    abstract public void sendDebugLogs();
+    public void onPrintDone(Message msg) {
 
+        Intent intent = new Intent();
+
+        intent.putExtra("printType", printType);
+        intent.putExtra("printObject", printObjectsSNO);
+        intent.putExtra("cheque_number", Long.parseLong("" + msg.obj));
+
+        setResult(RESULT_OK, intent);
+
+        PrintChequeActivity.this.finish();
+    }
+
+    public void sendDebugLogs() {
+
+    }
+
+    @Override
+    public void onBackPressed() {}
 }
 //© Все права на распостранение и модификацию модуля принадлежат ООО "АКИП" (www.akitorg.ru)

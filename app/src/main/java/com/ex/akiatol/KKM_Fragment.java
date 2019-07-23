@@ -1,9 +1,11 @@
-package com.ex.akiatol.print;
+package com.ex.akiatol;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.InputType;
@@ -16,10 +18,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.Fragment;
-import com.ex.akiatol.*;
+import com.ex.akiatol.print.KKM_Information;
+import com.ex.akiatol.print.PrintAtol10AsyncTask;
+import com.ex.akiatol.print.PrintObjects;
+import com.ex.akiatol.print.PrintType;
 
-
+import static com.ex.akiatol.PrintChequeActivity.PRINT_RESPONSE_CODE;
 import static ru.atol.drivers10.fptr.IFptr.LIBFPTR_SS_CLOSED;
 
 /**
@@ -31,13 +37,14 @@ public class KKM_Fragment extends Fragment implements View.OnClickListener {
     private final KKM_Information[] kkm_information = {null};
     private boolean isAtol10 = false;
 
-    private PrintChequeFragment fragment;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_kkm_info, container, false);
+        // create ContextThemeWrapper from the original Activity Context with the custom theme
+        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), PrintChequeActivity.getAppTheme());
+        LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
+        View rootView = localInflater.inflate(R.layout.fragment_kkm_info, container, false);
 
         rootView.findViewById(R.id.btn_check_ofd).setOnClickListener(this);
         rootView.findViewById(R.id.btn_open).setOnClickListener(this);
@@ -49,17 +56,6 @@ public class KKM_Fragment extends Fragment implements View.OnClickListener {
 
         isAtol10 = PreferenceManager.getDefaultSharedPreferences(getContext())
                 .getBoolean(getString(R.string.prefs_kkm_use_10_driver), true);
-
-        if (PrintChequeFragment.getContentFrame() == 0) {
-            Toast.makeText(getContext(), "Контейнер фрагмента отсутствует", Toast.LENGTH_LONG).show();
-            return null;
-        }
-
-        fragment = PrintChequeFragment.getFragment();
-        if (fragment == null) {
-            Toast.makeText(getContext(), "Фрагмент отсутствует", Toast.LENGTH_LONG).show();
-            return null;
-        }
 
         return rootView;
     }
@@ -147,35 +143,32 @@ public class KKM_Fragment extends Fragment implements View.OnClickListener {
 
         } else if(v.getId() == R.id.btn_x) {
 
-            bundle.putSerializable("printType", PrintChequeFragment.PrintType.XREP);
-            bundle.putSerializable("printObject", new PrintObjects.XRep());
+            Intent intent = new Intent(getContext(), PrintChequeActivity.class);
 
-            fragment.setArguments(bundle);
+            intent.putExtra("printType", PrintType.XREP);
+            intent.putExtra("printObject", new PrintObjects.XRep());
 
-            getActivity().getSupportFragmentManager().beginTransaction().replace(PrintChequeFragment.getContentFrame(),
-                    fragment, "KKM_Fragment").addToBackStack(null).commit();
+            getActivity().startActivityForResult(intent, PRINT_RESPONSE_CODE);
 
         } else if(v.getId() == R.id.btn_open) {
 
             if (kkm_information[0] != null && kkm_information[0].shiftState != LIBFPTR_SS_CLOSED) {
 
-                bundle.putSerializable("printType", PrintChequeFragment.PrintType.ZREP);
-                bundle.putSerializable("printObject", new PrintObjects.ZRep());
+                Intent intent = new Intent(getContext(), PrintChequeActivity.class);
 
-                fragment.setArguments(bundle);
+                intent.putExtra("printType", PrintType.ZREP);
+                intent.putExtra("printObject", new PrintObjects.ZRep());
 
-                getActivity().getSupportFragmentManager().beginTransaction().replace(PrintChequeFragment.getContentFrame(),
-                        fragment, "KKM_Fragment").addToBackStack(null).commit();
+                getActivity().startActivityForResult(intent, PRINT_RESPONSE_CODE);
 
             } else {
 
-                bundle.putSerializable("printType", PrintChequeFragment.PrintType.OPEN_SESSION);
-                bundle.putSerializable("printObject", new PrintObjects.OPEN_SEESION());
+                Intent intent = new Intent(getContext(), PrintChequeActivity.class);
 
-                fragment.setArguments(bundle);
+                intent.putExtra("printType", PrintType.OPEN_SESSION);
+                intent.putExtra("printObject", new PrintObjects.OPEN_SEESION());
 
-                getActivity().getSupportFragmentManager().beginTransaction().replace(PrintChequeFragment.getContentFrame(),
-                        fragment, "KKM_Fragment").addToBackStack(null).commit();
+                getActivity().startActivityForResult(intent, PRINT_RESPONSE_CODE);
 
             }
 
@@ -202,15 +195,11 @@ public class KKM_Fragment extends Fragment implements View.OnClickListener {
 
                     correction.sum = Double.parseDouble(value);
 
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("printType", PrintChequeFragment.PrintType.CORRECTION);
-                    bundle.putSerializable("printObject", correction);
+                    Intent intent = new Intent(getContext(), PrintChequeActivity.class);
+                    intent.putExtra("printType", PrintType.CORRECTION);
+                    intent.putExtra("printObject", correction);
 
-                    fragment.setArguments(bundle);
-
-                    if (getActivity() != null)
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(PrintChequeFragment.getContentFrame(),
-                            fragment, "KKM_Fragment").addToBackStack(null).commit();
+                    getActivity().startActivityForResult(intent, PRINT_RESPONSE_CODE);
 
                 } catch (NumberFormatException e) {
                     Toast.makeText(getContext(), "Введена неверная сумма", Toast.LENGTH_SHORT).show();

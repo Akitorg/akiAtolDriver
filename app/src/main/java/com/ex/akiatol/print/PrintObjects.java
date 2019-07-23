@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Created by Leo on 06.04.17.
  */
 @SuppressWarnings("WeakerAccess")
-public abstract class PrintObjects implements Serializable{
+public abstract class PrintObjects implements Serializable {
 
     public static class Order extends PrintObjects {
 
@@ -26,16 +26,6 @@ public abstract class PrintObjects implements Serializable{
         public String client_inn;
 
         public boolean needCopy;
-
-//        public Order (String extid, OrderGood[] goods, double sum, double get_sum, ChequeType type) {
-//
-//            this.extid = extid;
-//            this.goods = goods;
-//            this.full_sum = sum;
-//            this.get_sum = get_sum;
-//            this.type = type;
-//
-//        }
 
         public Order (String extid, OrderGood[] goods, double sum, double get_sum, ChequeType type,
                       String e_mail, String client_name, String client_inn, boolean needCopy) {
@@ -89,7 +79,7 @@ public abstract class PrintObjects implements Serializable{
 
     }
 
-    public static class OrderGood implements Cloneable {
+    public static class OrderGood implements Cloneable, Serializable {
 
         public String extid;
         public String name;

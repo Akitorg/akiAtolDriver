@@ -13,12 +13,12 @@ public class PrintResult {
     private final int result_status;
     private final String result;
 
-    public PrintResult (String error){
+    PrintResult (String error){
         result_status = STATUS_ERROR;
         result = error;
     }
 
-    public PrintResult (int number){
+    PrintResult (int number){
         result_status = STATUS_DONE;
         result = String.valueOf(number);
     }
