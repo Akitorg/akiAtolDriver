@@ -38,7 +38,7 @@ public class PrintChequeActivity extends Activity implements PrintResponseListen
 
     public static final int PRINT_RESPONSE_CODE = 1021;
 
-    private static int theme = R.style.AppTheme;
+    private static int theme = R.style.AtolTheme;
     public static void setDarkTheme() { theme = R.style.AtolThemeDark; }
     public static void setLightTheme() { theme = R.style.AtolTheme; }
     public static int getAppTheme() { return theme; }

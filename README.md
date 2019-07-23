@@ -44,7 +44,7 @@ Add it in your root build.gradle at the end of repositories:
 		}
 	}
 	
-Step 2. Add the dependency
+#### Step 2. Add the dependency
 
 	dependencies {
 	        implementation 'com.github.Akitorg:akiAtolDriver:-SNAPSHOT'
@@ -59,7 +59,7 @@ Step 2. Add the dependency
         </repository>
     </repositories>
     
-Step 2. Add the dependency
+#### Step 2. Add the dependency
 
 	<dependency>
         <groupId>com.github.Akitorg</groupId>
@@ -69,12 +69,19 @@ Step 2. Add the dependency
     
 ### Using
 
-Step 1. To show user settings screen (fragment)
+
+#### Step 1. To show user settings screen (fragment)
+
+
 
 	getFragmentManager().beginTransaction().replace(R.id.content_frame, new SettingsKKMFragment())
 	.addToBackStack("SettingsKKM").commit();
+
+
     
-Step 2. To print cheque start PrintChequeActivity with extras printType and printObject
+#### Step 2. To print cheque start PrintChequeActivity with extras printType and printObject
+
+
 
     PrintType pType = PrintType.ORDER_CASH;
     PrintObjects.Order order = new PrintObjects.Order(sale_extid, goods, docSum,
@@ -86,12 +93,20 @@ Step 2. To print cheque start PrintChequeActivity with extras printType and prin
     intent.putExtra("printObject", order);
 
     getActivity().startActivityForResult(intent, PRINT_RESPONSE_CODE);
+
+
     
 To make for example return of order simple change PrintType
+
+
         
     PrintType pType = PrintType.RETORDER_CASH;
+
+
     
-Step 3. After Activity done it will give the result
+#### Step 3. After Activity done it will give the result
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -121,27 +136,32 @@ Step 3. After Activity done it will give the result
             }  
         }        
     }
-    
-Step 4. To make income/outcome or report you can call KKM_Info fragment
+
+
+      
+#### Step 4. To make income/outcome or report you can call KKM_Info fragment
+
+
 
     Fragment frag = new KKM_Fragment();
     
     FragmentManager fm = getSupportFragmentManager();
     fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     fm.beginTransaction().replace(R.id.content_frame, frag).commit();
+
+
     
 Anyway if you want to do it bu yourself for some reason
 
     Intent intent = new Intent(getContext(), PrintChequeActivity.class);
     
-    intent.putExtra("printType", PrintType.ZREP);                           //Close session is called in this example
-    intent.putExtra("printObject", new PrintObjects.ZRep());
+    intent.putExtra("printType", PrintType.ZREP);           
+    intent.putExtra("printObject", new PrintObjects.ZRep()); // Close session is called in this example
 
     getActivity().startActivityForResult(intent, PRINT_RESPONSE_CODE);    
 
 PrintObjects.Order constructor in this example get this params
 
-    new PrintObjects.Order(
     sale_extid  - uuid of order
     goods       - array of object OrderGood
     docSum      - sum of doc
