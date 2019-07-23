@@ -40,7 +40,7 @@ public class PrintChequeActivity extends Activity implements PrintResponseListen
 
     private static int theme = R.style.AppTheme;
     public static void setDarkTheme() { theme = R.style.AtolThemeDark; }
-    public static void setLightTheme() { theme = R.style.AppTheme; }
+    public static void setLightTheme() { theme = R.style.AtolTheme; }
     public static int getAppTheme() { return theme; }
 
     @Override
