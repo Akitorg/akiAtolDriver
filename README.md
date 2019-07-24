@@ -1,6 +1,8 @@
 # akiAtolDriver
 
-Adapter and some visual part for using atol kkm library
+Adapter and some visual part for using atol kkm library.
+
+Supports both 9 and 10 versions
 
 ## Getting Started
 
@@ -8,27 +10,26 @@ Adapter and some visual part for using atol kkm library
 
 #### Print KKM Activity to show user
 
-    ![alt text](https://mobilecash.akitorg.ru/images/screen_1.png)
+![alt text](https://mobilecash.akitorg.ru/images/screen_1.png)
 
 #### Business logic released, such as:
 
-    Sno slice
-    
-    Discount math
-    
-    Accuracy math
+1. Slice by vat system
+2. Discount math
+3. Accuracy math
+4. KKM emulation
     
 #### Huge settings amount
 
-    ![alt text](https://mobilecash.akitorg.ru/images/screen_2.png)
+![alt text](https://mobilecash.akitorg.ru/images/screen_2.png)
 
 #### Theme settings:
 
     PrintChequeActivity.setDarkTheme();
     PrintChequeActivity.setLightTheme();
     
-    ![alt text](https://mobilecash.akitorg.ru/images/screen_3.png)
-    ![alt text](https://mobilecash.akitorg.ru/images/screen_4.png)
+![alt text](https://mobilecash.akitorg.ru/images/screen_3.png)
+![alt text](https://mobilecash.akitorg.ru/images/screen_4.png)
     
 
 ### Installing
@@ -188,3 +189,6 @@ PrintObjects.OrderGood constructor in this example get this params
     isImport  - is good import? 
     country   - country code (for import) 
     decNumber - declaration number (for import) 
+
+Here you can see the values of [a PrintType](https://github.com/Akitorg/akiAtolDriver/blob/master/app/src/main/java/com/ex/akiatol/print/PrintType.java) and [a PrintObjects](https://github.com/Akitorg/akiAtolDriver/blob/master/app/src/main/java/com/ex/akiatol/print/PrintObjects.java)
+

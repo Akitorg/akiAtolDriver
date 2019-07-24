@@ -40,3 +40,13 @@ dependencies {
 repositories {
     mavenCentral()
 }
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            groupId project.group
+            artifactId 'akiatol'
+            packaging 'aar'
+        }
+    }
+}
