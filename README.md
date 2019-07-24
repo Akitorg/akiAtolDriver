@@ -18,6 +18,12 @@ Supports both 9 and 10 versions
 2. Discount math
 3. Accuracy math
 4. KKM emulation
+5. Income, outcome, correction, Z/X-Reports
+6. Service to check count of un send to OFD docs
+
+    //Проверка неотправленных в ОФД заказов
+    startService(new Intent(MainActivity.this, OFDService.class));
+    registerReceiver(ofdUnsendReceiver, new IntentFilter("ofdUnsend"));
     
 #### Huge settings amount
 

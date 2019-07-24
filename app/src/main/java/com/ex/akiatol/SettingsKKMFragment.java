@@ -80,11 +80,13 @@ public class SettingsKKMFragment extends PreferenceFragmentCompat implements Sha
                 boolean isAtol10 = PreferenceManager.getDefaultSharedPreferences(getContext())
                         .getBoolean(getString(R.string.prefs_kkm_use_10_driver), true);
 
+                String PACKAGE_NAME = getContext().getPackageName();
+
                 String filename;
                 if (isAtol10)
-                    filename = "android/data/com.akitorg.mobilecash/files/drivers10/logs/fptr10.log";
+                    filename = "android/data/" + PACKAGE_NAME + "/files/drivers10/logs/fptr10.log";
                 else
-                    filename = "android/data/com.akitorg.mobilecash/files/drivers9/fptr_log.txt";
+                    filename = "android/data/" + PACKAGE_NAME + "/files/drivers9/fptr_log.txt";
 
                 File filelocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), filename);
                 Uri path = Uri.fromFile(filelocation);
@@ -131,7 +133,7 @@ public class SettingsKKMFragment extends PreferenceFragmentCompat implements Sha
                 .unregisterOnSharedPreferenceChangeListener(this);
     }
 
-    protected void openFprtSettings() {
+    private void openFprtSettings() {
 
         boolean isAtol10 = android.preference.PreferenceManager.getDefaultSharedPreferences(getContext())
                 .getBoolean(getString(R.string.prefs_kkm_use_10_driver), true);
