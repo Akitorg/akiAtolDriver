@@ -37,6 +37,11 @@ public class KKM_Fragment extends Fragment implements View.OnClickListener {
     private final KKM_Information[] kkm_information = {null};
     private boolean isAtol10 = false;
 
+    private View.OnClickListener listener = null;
+    public void setOnClickListener(View.OnClickListener listener) {
+        this.listener = listener;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -176,6 +181,10 @@ public class KKM_Fragment extends Fragment implements View.OnClickListener {
 
             print_correction();
 
+        } else {
+
+            if (listener != null)
+                listener.onClick(v);
         }
     }
 

@@ -2,7 +2,9 @@
 
 Adapter and some visual part for using atol kkm library.
 
-Supports both 9 and 10 versions
+Supports both 9 and 10 versions.
+
+UPDATE 9 version is no longer supported.
 
 ## Getting Started
 
@@ -77,6 +79,35 @@ Add it in your root build.gradle at the end of repositories:
         <artifactId>akiAtolDriver</artifactId>
         <version>-SNAPSHOT</version>
     </dependency>
+    
+## IMPORTANT
+
+Because this repo is private you need also do this steps:
+
+#### Step 1. Authorize JitPack and get your personal access token:
+    
+    jp_s8m7m2t3q9jqdnft6c4jv9hg2u
+    
+#### Step 2. Add the token to $HOME/.gradle/gradle.properties
+    								
+    								
+     authToken=jp_s8m7m2t3q9jqdnft6c4jv9hg2u
+     
+    							
+  Then use authToken as the username in your build.gradle:
+    
+    								
+    								
+     allprojects {
+        repositories {
+            ...
+            maven {
+                url "https://jitpack.io"
+                credentials { username authToken }
+            }
+        }
+     }
+    		
     
 ### Using
 

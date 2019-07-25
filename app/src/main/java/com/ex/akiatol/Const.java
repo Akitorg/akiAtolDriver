@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 import java.util.Locale;
 
-/**
+/**ReLinker
  * Some interesting usable static methods
  * Created by Leo on 30.03.17.
  */

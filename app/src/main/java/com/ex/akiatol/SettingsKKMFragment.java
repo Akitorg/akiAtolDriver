@@ -3,15 +3,16 @@ package com.ex.akiatol;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.Toast;
 import androidx.preference.*;
-import com.atol.drivers.fptr.Fptr;
-import com.atol.drivers.fptr.IFptr;
-import com.atol.drivers.fptr.settings.SettingsActivity;
+//import com.atol.drivers.fptr.Fptr;
+//import com.atol.drivers.fptr.IFptr;
+//import com.atol.drivers.fptr.settings.SettingsActivity;
 
 import java.io.File;
 
@@ -96,7 +97,7 @@ public class SettingsKKMFragment extends PreferenceFragmentCompat implements Sha
                 String to[] = {"support@akitorg.ru"};
                 emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
                 emailIntent.putExtra(Intent.EXTRA_STREAM, path);
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Логи ККМ из приложения 'Мобильная касса'");
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Логи ККМ из приложения " + getApplicationName(getContext()));
                 emailIntent.putExtra(Intent.EXTRA_TEXT, message);
                 startActivity(Intent.createChooser(emailIntent , "Send email..."));
 
@@ -116,6 +117,12 @@ public class SettingsKKMFragment extends PreferenceFragmentCompat implements Sha
             kkm_category.removePreference(findPreference ("prefs_kkm_default_mail"));
     }
 
+    public static String getApplicationName(Context context) {
+        ApplicationInfo applicationInfo = context.getApplicationInfo();
+        int stringId = applicationInfo.labelRes;
+        return stringId == 0 ? applicationInfo.nonLocalizedLabel.toString() : context.getString(stringId);
+    }
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {}
 
@@ -131,6 +138,14 @@ public class SettingsKKMFragment extends PreferenceFragmentCompat implements Sha
         super.onPause();
         getPreferenceScreen().getSharedPreferences()
                 .unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
+        editor.putBoolean(getString(R.string.prefs_kkm_use_10_driver), true);
+        editor.apply();
     }
 
     private void openFprtSettings() {
@@ -160,21 +175,21 @@ public class SettingsKKMFragment extends PreferenceFragmentCompat implements Sha
 
         } else {
 
-            String settings = getContext().getSharedPreferences(FPTR_PREFERENCES, Context.MODE_PRIVATE)
-                    .getString(SettingsActivity.DEVICE_SETTINGS, null);
-
-            if (settings == null) {
-
-                IFptr fprint = new Fptr();
-                fprint.create(getContext());
-
-                settings = fprint.get_DeviceSettings();
-                fprint.destroy();
-            }
-
-            Intent intent = new Intent(getContext(), SettingsActivity.class);
-            intent.putExtra(SettingsActivity.DEVICE_SETTINGS, settings);
-            startActivityForResult(intent, REQUEST_FPTR_SETTINGS);
+//            String settings = getContext().getSharedPreferences(FPTR_PREFERENCES, Context.MODE_PRIVATE)
+//                    .getString(SettingsActivity.DEVICE_SETTINGS, null);
+//
+//            if (settings == null) {
+//
+//                IFptr fprint = new Fptr();
+//                fprint.create(getContext());
+//
+//                settings = fprint.get_DeviceSettings();
+//                fprint.destroy();
+//            }
+//
+//            Intent intent = new Intent(getContext(), SettingsActivity.class);
+//            intent.putExtra(SettingsActivity.DEVICE_SETTINGS, settings);
+//            startActivityForResult(intent, REQUEST_FPTR_SETTINGS);
 
         }
 
@@ -244,9 +259,9 @@ public class SettingsKKMFragment extends PreferenceFragmentCompat implements Sha
                 if (isAtol10)
                     editor.putString( ru.atol.drivers10.fptr.settings.SettingsActivity.DEVICE_SETTINGS,
                             data.getExtras().getString(ru.atol.drivers10.fptr.settings.SettingsActivity.DEVICE_SETTINGS));
-                else
-                    editor.putString( SettingsActivity.DEVICE_SETTINGS,
-                            data.getExtras().getString(SettingsActivity.DEVICE_SETTINGS));
+//                else
+//                    editor.putString( SettingsActivity.DEVICE_SETTINGS,
+//                            data.getExtras().getString(SettingsActivity.DEVICE_SETTINGS));
 
                 editor.apply();
 

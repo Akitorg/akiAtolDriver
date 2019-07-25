@@ -14,8 +14,8 @@ import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
-import com.atol.drivers.fptr.Fptr;
-import com.atol.drivers.fptr.settings.SettingsActivity;
+//import com.atol.drivers.fptr.Fptr;
+//import com.atol.drivers.fptr.settings.SettingsActivity;
 
 import static com.ex.akiatol.Const.FPTR_PREFERENCES;
 
@@ -55,88 +55,88 @@ public class OFDService extends Service {
                 @Override
                 public void run() {
 
-                    int count = 0;
-                    String unsendDate = "";
-
-                    Fptr fptr = new Fptr();
-
-                    try {
-                        fptr.create(getApplication());
-
-                        //publishProgress("Загрузка настроек...");
-                        if (fptr.put_DeviceSettings( getSharedPreferences( FPTR_PREFERENCES, Context.MODE_PRIVATE).getString( SettingsActivity.DEVICE_SETTINGS, null)) < 0) {
-                            //checkError();
-                            fptr.destroy();
-                            return;
-                        }
-                        //publishProgress("Установка соединения...");
-                        if (fptr.put_DeviceEnabled(true) < 0) {
-                            //checkError();
-                            fptr.destroy();
-                            return;
-                        }
-                        //publishProgress("Проверка связи...");
-                        if (fptr.GetStatus() < 0) {
-                            //checkError();
-                            fptr.destroy();
-                            return;
-                        }
-
-                        if (fptr.put_RegisterNumber(44) < 0) {
-                            //checkError();
-                            fptr.destroy();
-                            return;
-                        }
-                        if (fptr.GetRegister() < 0) {
-                            //checkError();
-                            fptr.destroy();
-                            return;
-                        }
-
-                        count = fptr.get_Count();
-
-                        if (count > 0) {
-
-                            if (fptr.put_RegisterNumber(45) < 0) {
-                                //checkError();
-                                fptr.destroy();
-                                return;
-                            }
-                            if (fptr.GetRegister() < 0) {
-                                //checkError();
-                                fptr.destroy();
-                                return;
-                            }
-
-                            unsendDate = new SimpleDateFormat("dd.MM.yy HH:mm:ss",
-                                    Locale.getDefault()).format(fptr.get_Date());
-                        }
-
-                    } catch (Exception e) {
-
-                        String err = e.getMessage();
-                        if (err == null)
-                            err = e.toString();
-
-                        Log.i("OFDService", err);
-
-                    } finally {
-                        fptr.destroy();
-                    }
-
-                    Log.i("OFDService", "IT'S ALIVE!!!");
-                    if (count > 0) {
-
-                        Log.e("OFDService", "Количество неотправленных документов " + count);
-
-                        Intent i = new Intent("ofdUnsend");
-                        i.putExtra("unsendCount", count);
-                        i.putExtra("unsendDate", unsendDate);
-
-                        sendBroadcast(i);
-
-                    } else
-                        Log.i("OFDService", "Exchange success!");
+//                    int count = 0;
+//                    String unsendDate = "";
+//
+//                    Fptr fptr = new Fptr();
+//
+//                    try {
+//                        fptr.create(getApplication());
+//
+//                        //publishProgress("Загрузка настроек...");
+//                        if (fptr.put_DeviceSettings( getSharedPreferences( FPTR_PREFERENCES, Context.MODE_PRIVATE).getString( SettingsActivity.DEVICE_SETTINGS, null)) < 0) {
+//                            //checkError();
+//                            fptr.destroy();
+//                            return;
+//                        }
+//                        //publishProgress("Установка соединения...");
+//                        if (fptr.put_DeviceEnabled(true) < 0) {
+//                            //checkError();
+//                            fptr.destroy();
+//                            return;
+//                        }
+//                        //publishProgress("Проверка связи...");
+//                        if (fptr.GetStatus() < 0) {
+//                            //checkError();
+//                            fptr.destroy();
+//                            return;
+//                        }
+//
+//                        if (fptr.put_RegisterNumber(44) < 0) {
+//                            //checkError();
+//                            fptr.destroy();
+//                            return;
+//                        }
+//                        if (fptr.GetRegister() < 0) {
+//                            //checkError();
+//                            fptr.destroy();
+//                            return;
+//                        }
+//
+//                        count = fptr.get_Count();
+//
+//                        if (count > 0) {
+//
+//                            if (fptr.put_RegisterNumber(45) < 0) {
+//                                //checkError();
+//                                fptr.destroy();
+//                                return;
+//                            }
+//                            if (fptr.GetRegister() < 0) {
+//                                //checkError();
+//                                fptr.destroy();
+//                                return;
+//                            }
+//
+//                            unsendDate = new SimpleDateFormat("dd.MM.yy HH:mm:ss",
+//                                    Locale.getDefault()).format(fptr.get_Date());
+//                        }
+//
+//                    } catch (Exception e) {
+//
+//                        String err = e.getMessage();
+//                        if (err == null)
+//                            err = e.toString();
+//
+//                        Log.i("OFDService", err);
+//
+//                    } finally {
+//                        fptr.destroy();
+//                    }
+//
+//                    Log.i("OFDService", "IT'S ALIVE!!!");
+//                    if (count > 0) {
+//
+//                        Log.e("OFDService", "Количество неотправленных документов " + count);
+//
+//                        Intent i = new Intent("ofdUnsend");
+//                        i.putExtra("unsendCount", count);
+//                        i.putExtra("unsendDate", unsendDate);
+//
+//                        sendBroadcast(i);
+//
+//                    } else
+//                        Log.i("OFDService", "Exchange success!");
                 }
 
             });
