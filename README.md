@@ -10,7 +10,9 @@ Supports both 9 and 10 versions
 
 #### Print KKM Activity to show user
 
-![alt text](https://mobilecash.akitorg.ru/images/screen_1.png)
+
+<img src="https://mobilecash.akitorg.ru/images/screen_1.png" alt="drawing" width="250"/>
+
 
 #### Business logic released, such as:
 
@@ -22,20 +24,22 @@ Supports both 9 and 10 versions
 6. Service to check count of un send to OFD docs
 
     //Проверка неотправленных в ОФД заказов
+    
     startService(new Intent(MainActivity.this, OFDService.class));
     registerReceiver(ofdUnsendReceiver, new IntentFilter("ofdUnsend"));
     
 #### Huge settings amount
 
-![alt text](https://mobilecash.akitorg.ru/images/screen_2.png)
+
+<img src="https://mobilecash.akitorg.ru/images/screen_2.png" alt="drawing" width="250"/>
 
 #### Theme settings:
 
     PrintChequeActivity.setDarkTheme();
     PrintChequeActivity.setLightTheme();
     
-![alt text](https://mobilecash.akitorg.ru/images/screen_3.png)
-![alt text](https://mobilecash.akitorg.ru/images/screen_4.png)
+
+<img src="https://mobilecash.akitorg.ru/images/screen_3.png" alt="drawing" width="250"/> <img src="https://mobilecash.akitorg.ru/images/screen_4.png" alt="drawing" width="250"/>
     
 
 ### Installing
@@ -133,7 +137,7 @@ To make for example return of order simple change PrintType
 
                     for (HashMap.Entry<Integer, PrintObjects> entry: printObjectsSNO.entrySet()) {
 
-                        // HERE YOU CAN SAVE DOCS OR DO WHAT EVE YOU WANT
+                        // HERE YOU CAN SAVE DOCS OR DO WHAT EVER YOU WANT
                         DBRequests.saveDoc(this, printType, printObject, chequeNumber);
                     }
 
