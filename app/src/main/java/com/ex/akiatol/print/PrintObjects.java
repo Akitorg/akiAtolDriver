@@ -1,6 +1,7 @@
 package com.ex.akiatol.print;
 
 import com.ex.akiatol.Const;
+import ru.atol.drivers10.fptr.IFptr;
 
 import java.io.Serializable;
 
@@ -154,6 +155,7 @@ public abstract class PrintObjects implements Serializable {
         public double sum;
         public int doc_type;
         public int pay_type;
+        public int vat_rate = IFptr.LIBFPTR_TAX_VAT0;
 
     }
 

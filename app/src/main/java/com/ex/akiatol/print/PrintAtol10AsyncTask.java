@@ -318,7 +318,7 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
                         publishProgress("Регистрации позиций...");
 
                         registerPosition("Коррекция", correctionObject.sum, 1,
-                                correctionObject.sum, IFptr.LIBFPTR_TAX_VAT0, FULL_PAY,
+                                correctionObject.sum, correctionObject.vat_rate, FULL_PAY,
                                 "NORMAL", 0, false, "", "");
 
 

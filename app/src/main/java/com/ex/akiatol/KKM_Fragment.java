@@ -24,6 +24,7 @@ import com.ex.akiatol.print.KKM_Information;
 import com.ex.akiatol.print.PrintAtol10AsyncTask;
 import com.ex.akiatol.print.PrintObjects;
 import com.ex.akiatol.print.PrintType;
+import ru.atol.drivers10.fptr.IFptr;
 
 import static com.ex.akiatol.PrintChequeActivity.PRINT_RESPONSE_CODE;
 import static ru.atol.drivers10.fptr.IFptr.LIBFPTR_SS_CLOSED;
@@ -223,13 +224,36 @@ public class KKM_Fragment extends Fragment implements View.OnClickListener {
             }
         });
 
+        final AlertDialog.Builder adb_vat_rate = new AlertDialog.Builder(getContext());
+
+        String[] data_vat_rate = {"20%", "10%", "0%", "Без НДС"};
+        adb_vat_rate.setSingleChoiceItems(data_vat_rate, 0, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog_sum.show();
+
+                int vr = IFptr.LIBFPTR_TAX_NO;
+                if (which == 0) {
+                    vr = IFptr.LIBFPTR_TAX_VAT20;
+                } else if (which == 1) {
+                    vr = IFptr.LIBFPTR_TAX_VAT10;
+                } else if (which == 2) {
+                    vr = IFptr.LIBFPTR_TAX_VAT0;
+                }
+
+                correction.vat_rate = vr;
+                dialog.dismiss();
+            }
+        });
+        adb_vat_rate.setTitle("Ставка НДС");
+
         final AlertDialog.Builder adb_pay_type = new AlertDialog.Builder(getContext());
 
         String[] data_pay_type = {"Наличными", "Картой"};
         adb_pay_type.setSingleChoiceItems(data_pay_type, 0, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialog_sum.show();
+                adb_vat_rate.show();
                 correction.pay_type = which;
                 dialog.dismiss();
             }
