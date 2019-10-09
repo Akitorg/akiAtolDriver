@@ -337,8 +337,12 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
                     break;
                 case ORDER_CARD:
                 case ORDER_CASH:
+                case ORDER_CREDIT:
+                case ORDER_ADVANCE:
                 case RETORDER_CARD:
                 case RETORDER_CASH:
+                case RETORDER_ADVANCE:
+                case RETORDER_CREDIT:
                 case ORDER_COMBO:
 
                     int checkType = IFptr.LIBFPTR_RT_SELL;
@@ -382,6 +386,10 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
 
                             if (printType == ORDER_CASH || printType == RETORDER_CASH) {
                                 registerPayment(orderObject.get_sum, IFptr.LIBFPTR_PT_CASH);
+                            }else if (printType == ORDER_CREDIT || printType == RETORDER_CREDIT) {
+                                registerPayment(orderObject.get_sum, IFptr.LIBFPTR_PT_CREDIT);
+                            }else if (printType == ORDER_ADVANCE || printType == RETORDER_ADVANCE) {
+                                registerPayment(orderObject.get_sum, IFptr.LIBFPTR_PT_PREPAID);
                             } else if(printType == ORDER_COMBO) {
                                 registerPayment(orderObject.get_sum, IFptr.LIBFPTR_PT_CASH);
                                 registerPayment(round(orderObject.full_sum - orderObject.get_sum, 2), IFptr.LIBFPTR_PT_ELECTRONICALLY);
