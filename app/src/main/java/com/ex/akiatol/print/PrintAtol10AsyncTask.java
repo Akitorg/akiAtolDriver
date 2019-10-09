@@ -346,7 +346,7 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
                 case ORDER_COMBO:
 
                     int checkType = IFptr.LIBFPTR_RT_SELL;
-                    if (printType == RETORDER_CARD || printType == RETORDER_CASH)
+                    if (printType == RETORDER_CARD || printType == RETORDER_CASH || printType == RETORDER_ADVANCE|| printType == RETORDER_CREDIT)
                         checkType = IFptr.LIBFPTR_RT_SELL_RETURN;
 
                     for (HashMap.Entry<Integer, PrintObjects> entry : printObjectsSNO.entrySet()) {
