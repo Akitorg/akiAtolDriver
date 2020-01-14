@@ -57,7 +57,7 @@
     <string name="debug_mode_info">Работа в данном режиме требует постоянного доступа в интернет и может быть не стабильна!</string>
     <string name="name_cant_be_null">Наименование не может быть пустым</string>
 
-    <string name="version_name">1.0.0</string>
+    <string name="version_name">1.0.1</string>
     <string name="prefs_mail">prefs_mail</string>
     <string name="prefs_name">prefs_name</string>
 
