@@ -3,6 +3,7 @@ package com.ex.akiatol.print;
 import java.io.Serializable;
 
 /**
+ *
  * Created by Leo on 2019-07-22.
  */
 public enum PrintType implements Serializable {
