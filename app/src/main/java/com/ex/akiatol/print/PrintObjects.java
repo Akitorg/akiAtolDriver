@@ -26,6 +26,8 @@ public abstract class PrintObjects implements Serializable {
         public String client_name;
         public String client_inn;
 
+        public String tag1192;
+
         public boolean needCopy;
 
         public Order (String extid, OrderGood[] goods, double sum, double get_sum, ChequeType type,
@@ -72,6 +74,10 @@ public abstract class PrintObjects implements Serializable {
         public void set_client_info (String name, String inn){
             client_name = name;
             client_inn = inn;
+        }
+
+        public void set_1192(String tag){
+            tag1192 = tag;
         }
 
         public void set_need_copy() {

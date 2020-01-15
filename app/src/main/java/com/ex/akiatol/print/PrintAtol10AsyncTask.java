@@ -370,6 +370,10 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
                             fptr.setParam(1228, orderObject.client_inn);
                         }
 
+                        if (orderObject.tag1192 != null) {
+                            fptr.setParam(1192, orderObject.tag1192);
+                        }
+
                         fptr.setParam(IFptr.LIBFPTR_PARAM_RECEIPT_TYPE, checkType);
                         checkError(fptr.openReceipt());
 
