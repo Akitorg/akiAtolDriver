@@ -190,11 +190,10 @@ public class PrintChequeActivity extends Activity implements PrintResponseListen
         //send debug logs
         sendDebugLogs();
 
+        startPrint();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
+    private void startPrint() {
 
         boolean emulate_kkm = PreferenceManager.getDefaultSharedPreferences(this)
                 .getBoolean(getString(R.string.prefs_kkm_emulate), false);
@@ -222,6 +221,12 @@ public class PrintChequeActivity extends Activity implements PrintResponseListen
         }
 
     }
+
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//
+//    }
 
     @Override
     public void onUpdateListener(String... values) {
