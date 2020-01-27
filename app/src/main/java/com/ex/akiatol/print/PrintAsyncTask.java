@@ -82,11 +82,8 @@ public abstract class PrintAsyncTask extends AsyncTask<String, String, PrintResu
             boolean isCombo = printType == PrintType.ORDER_COMBO;
             if (isCombo) {
                 position_sum = round(item.price * item.count, 2);
-            } else if (orderObject.full_sum != orderObject.get_sum) {
-                position_sum = round((item.price * item.count) / orderObject.full_sum * orderObject.get_sum, 2);
-                item.price = round(position_sum / item.count, 2);
             } else {
-                position_sum = round(item.dsum, 2);
+                position_sum = round((item.price * item.count) / orderObject.full_sum * orderObject.get_sum, 2);
             }
 
             //Подсчет скидки
@@ -94,13 +91,15 @@ public abstract class PrintAsyncTask extends AsyncTask<String, String, PrintResu
             if (item.discount > 0) {
                 discount = round(item.discount * position_sum / 100, 2);
                 position_sum = round(position_sum - discount, 2);
-                item.price = round(position_sum / item.count, 2);
             }
+
+            double position_price = round(position_sum / item.count, 2);
 
             if (orderObject.type == ChequeType.CHECK_OF_SHIPMENT || orderObject.type == ChequeType.PART_PRE_PAY) {
                 item.name = "Предоплата за " + item.name;
             }
 
+            item.price = position_price;
             item.dsum = position_sum;
 
             positions_sum += item.dsum;
