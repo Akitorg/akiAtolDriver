@@ -53,9 +53,18 @@ public abstract class PrintAsyncTask extends AsyncTask<String, String, PrintResu
     // 17 о суммах уплаченного торгового сбора
     // 18 о курортном сборе
 
-    abstract void registerPosition(String name, double price, double quantity, double positionSum,
-                                   int taxNumber, ChequeType chequeType, String type, double discount,
-                                   boolean isImport, String country, String decNumber) throws Exception;
+    abstract void registerPosition(String name,
+                                   double price,
+                                   double quantity,
+                                   double positionSum,
+                                   int taxNumber,
+                                   double taxSum,
+                                   ChequeType chequeType,
+                                   String type,
+                                   double discount,
+                                   boolean isImport,
+                                   String country,
+                                   String decNumber) throws Exception;
 
     void registerPositions(PrintObjects.Order orderObject, PrintType printType) throws Exception {
 
@@ -99,7 +108,7 @@ public abstract class PrintAsyncTask extends AsyncTask<String, String, PrintResu
                 item.price = round(item.dsum / item.count, 2);
             }
 
-            registerPosition(item.name, item.price, item.count, item.dsum, tax_vat,
+            registerPosition(item.name, item.price, item.count, item.dsum, tax_vat, item.vat_sum,
                     orderObject.type, item.type, discount, item.isImport, item.country, item.decNumber);
 
         }

@@ -9,6 +9,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
+import org.apache.commons.math3.util.Precision;
+
 import java.util.Locale;
 
 /**ReLinker
@@ -42,12 +44,14 @@ public abstract class Const {
     }
 
     public static double round(double value, int places) {
+
         if (places < 0) throw new IllegalArgumentException();
 
-        long factor = (long) Math.pow(10, places);
-        value = value * factor;
-        long tmp = Math.round(value);
-        return (double) tmp / factor;
+        // Ебучая математика!!!! Приходиться округлять сначало до пред. числа
+        // Решение проблемы с округлением числа 1332.0449999999998
+        double valueNew = Precision.round(value, places + 1);
+
+        return Precision.round(valueNew, places);
     }
 
     public static double countDiscout(double price, double discount) {

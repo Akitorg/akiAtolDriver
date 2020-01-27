@@ -132,16 +132,25 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
     }
 
     @Override
-    void registerPosition(String name, double price, double quantity, double positionSum,
-                          int taxNumber, ChequeType chequeType, String type, double discount,
-                          boolean isImport, String country, String decNumber) throws Exception {
+    void registerPosition(String name,
+                          double price,
+                          double quantity,
+                          double positionSum,
+                          int taxNumber,
+                          double taxSum,
+                          ChequeType chequeType,
+                          String type,
+                          double discount,
+                          boolean isImport,
+                          String country,
+                          String decNumber) throws Exception {
 
-        double difference = round(positionSum - price * quantity, 2);
-        if (difference < 0) {
-            price += difference;
-            price = round(price, 2);
-            difference = round(positionSum - price * quantity, 2);
-        }
+//        double difference = round(positionSum - price * quantity, 2);
+//        if (difference < 0) {
+//            price += difference;
+//            price = round(price, 2);
+//            difference = round(positionSum - price * quantity, 2);
+//        }
 
         fptr.setParam(IFptr.LIBFPTR_PARAM_COMMODITY_NAME, name);
         fptr.setParam(IFptr.LIBFPTR_PARAM_PRICE, price);
@@ -153,8 +162,13 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
             fptr.setParam(IFptr.LIBFPTR_PARAM_INFO_DISCOUNT_SUM, discount);
         }
 
+        if (!name.equals("Коррекция")) {
+            fptr.setParam(IFptr.LIBFPTR_PARAM_TAX_SUM, taxSum);
+        }
+
         switch (chequeType) {
             case FULL_PAY:
+            case CHECK_OF_SHIPMENT:
                 fptr.setParam(1214, 4);
                 break;
             case FULL_PRE_PAY:
@@ -162,9 +176,6 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
                 break;
             case PART_PRE_PAY:
                 fptr.setParam(1214, 2);
-                break;
-            case CHECK_OF_SHIPMENT:
-                fptr.setParam(1214, 4);
                 break;
             default:
                 break;
@@ -185,9 +196,9 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
 
         checkError(fptr.registration());
 
-        if (difference != 0)
-            registerPosition(name, Math.abs(difference), 1, Math.abs(difference),
-                    taxNumber, chequeType, type, 0, isImport, country, decNumber);
+//        if (difference != 0)
+//            registerPosition(name, Math.abs(difference), 1, Math.abs(difference),
+//                    taxNumber, chequeType, type, 0, isImport, country, decNumber);
 
     }
 
@@ -318,7 +329,8 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
                         publishProgress("Регистрации позиций...");
 
                         registerPosition("Коррекция", correctionObject.sum, 1,
-                                correctionObject.sum, correctionObject.vat_rate, FULL_PAY,
+                                correctionObject.sum, correctionObject.vat_rate,
+                                0, FULL_PAY,
                                 "NORMAL", 0, false, "", "");
 
 

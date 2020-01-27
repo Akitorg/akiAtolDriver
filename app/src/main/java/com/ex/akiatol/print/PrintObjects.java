@@ -162,6 +162,7 @@ public abstract class PrintObjects implements Serializable {
         public int doc_type;
         public int pay_type;
         public int vat_rate = IFptr.LIBFPTR_TAX_VAT0;
+        public double vat_sum;
 
     }
 
