@@ -59,6 +59,7 @@ public abstract class PrintAsyncTask extends AsyncTask<String, String, PrintResu
                                    double positionSum,
                                    int taxNumber,
                                    double taxSum,
+                                   boolean recountVatSum,
                                    ChequeType chequeType,
                                    String type,
                                    double discount,
@@ -66,7 +67,7 @@ public abstract class PrintAsyncTask extends AsyncTask<String, String, PrintResu
                                    String country,
                                    String decNumber) throws Exception;
 
-    void registerPositions(PrintObjects.Order orderObject, PrintType printType) throws Exception {
+    void registerPositions(PrintObjects.Order orderObject, PrintType printType, boolean recountVatSum) throws Exception {
 
         double positions_sum = 0;
 
@@ -108,7 +109,7 @@ public abstract class PrintAsyncTask extends AsyncTask<String, String, PrintResu
                 item.price = round(item.dsum / item.count, 2);
             }
 
-            registerPosition(item.name, item.price, item.count, item.dsum, tax_vat, item.vat_sum,
+            registerPosition(item.name, item.price, item.count, item.dsum, tax_vat, item.vat_sum, recountVatSum,
                     orderObject.type, item.type, discount, item.isImport, item.country, item.decNumber);
 
         }

@@ -1,16 +1,7 @@
 package com.ex.akiatol.print;
 
 import android.content.Context;
-import android.preference.PreferenceManager;
-
-
-
-import java.lang.ref.WeakReference;
 import java.util.HashMap;
-import java.util.Locale;
-
-import static com.ex.akiatol.Const.FPTR_PREFERENCES;
-import static com.ex.akiatol.print.PrintType.*;
 
 /**
  * Печать чека через драйвер Атол 9 версии
@@ -24,7 +15,7 @@ public class PrintAtol9AsyncTask extends PrintAsyncTask {
     }
 
     @Override
-    void registerPosition(String name, double price, double quantity, double positionSum, int taxNumber, double taxSum, ChequeType chequeType, String type, double discount, boolean isImport, String country, String decNumber) throws Exception {
+    void registerPosition(String name, double price, double quantity, double positionSum, int taxNumber, double taxSum, boolean recountVatSum, ChequeType chequeType, String type, double discount, boolean isImport, String country, String decNumber) throws Exception {
 
     }
 

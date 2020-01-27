@@ -36,6 +36,7 @@
     <string name="prefs_kkm_use_avans">prefs_kkm_use_avanst</string>
     <string name="prefs_kkm_use_pre_payment">prefs_kkm_use_pre_payment</string>
     <string name="prefs_kkm_use_combo_payment">prefs_kkm_use_combo_payment</string>
+    <string name="prefs_kkm_use_count_vat_sum">prefs_kkm_use_count_vat_sum</string>
     <string name="prefs_kkm_emulate">prefs_kkm_emulate</string>
     <string name="prefs_user_name">prefs_user_name</string>
     <string name="prefs_user_inn">prefs_user_inn</string>

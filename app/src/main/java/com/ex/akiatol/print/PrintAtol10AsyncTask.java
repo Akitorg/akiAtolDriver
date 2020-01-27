@@ -138,6 +138,7 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
                           double positionSum,
                           int taxNumber,
                           double taxSum,
+                          boolean recountVatSum,
                           ChequeType chequeType,
                           String type,
                           double discount,
@@ -152,18 +153,20 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
 //            difference = round(positionSum - price * quantity, 2);
 //        }
 
+
+
         fptr.setParam(IFptr.LIBFPTR_PARAM_COMMODITY_NAME, name);
         fptr.setParam(IFptr.LIBFPTR_PARAM_PRICE, price);
         fptr.setParam(IFptr.LIBFPTR_PARAM_QUANTITY, quantity);
         fptr.setParam(IFptr.LIBFPTR_PARAM_SUM, positionSum);
         fptr.setParam(IFptr.LIBFPTR_PARAM_TAX_TYPE, taxNumber);
 
-        if (discount > 0){
-            fptr.setParam(IFptr.LIBFPTR_PARAM_INFO_DISCOUNT_SUM, discount);
+        if (recountVatSum) {
+            fptr.setParam(IFptr.LIBFPTR_PARAM_USE_ONLY_TAX_TYPE, true);
         }
 
-        if (!name.equals("Коррекция")) {
-            fptr.setParam(IFptr.LIBFPTR_PARAM_TAX_SUM, taxSum);
+        if (discount > 0) {
+            fptr.setParam(IFptr.LIBFPTR_PARAM_INFO_DISCOUNT_SUM, discount);
         }
 
         switch (chequeType) {
@@ -195,6 +198,12 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
         }
 
         checkError(fptr.registration());
+
+        if (recountVatSum) {
+            fptr.setParam(IFptr.LIBFPTR_PARAM_TAX_TYPE, taxNumber);
+            fptr.setParam(IFptr.LIBFPTR_PARAM_TAX_SUM, taxSum);
+            fptr.receiptTax();
+        }
 
 //        if (difference != 0)
 //            registerPosition(name, Math.abs(difference), 1, Math.abs(difference),
@@ -239,6 +248,8 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
         String inn = PreferenceManager.getDefaultSharedPreferences(context)
                 .getString(context.getString(R.string.prefs_user_inn), "");
 
+        boolean recountVatSum = PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(context.getString(R.string.prefs_kkm_use_count_vat_sum), false);
         try {
 
             connectToKKM();
@@ -330,7 +341,7 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
 
                         registerPosition("Коррекция", correctionObject.sum, 1,
                                 correctionObject.sum, correctionObject.vat_rate,
-                                0, FULL_PAY,
+                                0, false, FULL_PAY,
                                 "NORMAL", 0, false, "", "");
 
 
@@ -395,7 +406,7 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
                         checkError(fptr.openReceipt());
 
                         publishProgress("Регистрация позиций чека...");
-                        registerPositions(orderObject, printType);
+                        registerPositions(orderObject, printType, recountVatSum);
 
                         publishProgress("Регистрация Итога...");
 //                        fptr.setParam(IFptr.LIBFPTR_PARAM_SUM, orderObject.get_sum);
