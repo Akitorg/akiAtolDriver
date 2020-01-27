@@ -24,7 +24,7 @@ public class PrintAtol9AsyncTask extends PrintAsyncTask {
     }
 
     @Override
-    void registerPosition(String name, double price, double quantity, double positionSum, int taxNumber, ChequeType chequeType, String type, double discount, boolean isImport, String country, String decNumber) throws Exception {
+    void registerPosition(String name, double price, double quantity, double positionSum, int taxNumber, double taxSum, ChequeType chequeType, String type, double discount, boolean isImport, String country, String decNumber) throws Exception {
 
     }
 
