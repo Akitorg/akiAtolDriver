@@ -82,8 +82,10 @@ public abstract class PrintAsyncTask extends AsyncTask<String, String, PrintResu
             boolean isCombo = printType == PrintType.ORDER_COMBO;
             if (isCombo) {
                 position_sum = round(item.price * item.count, 2);
-            } else {
+            } else if (orderObject.full_sum != orderObject.get_sum) {
                 position_sum = round((item.price * item.count) / orderObject.full_sum * orderObject.get_sum, 2);
+            } else {
+                position_sum = round(item.dsum, 2);
             }
 
             //Подсчет скидки

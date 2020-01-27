@@ -50,11 +50,11 @@
             android:title="Использовать комбооплату"
             app:iconSpaceReserved="false" />
         <SwitchPreference
-                android:defaultValue="false"
-                android:key="@string/prefs_kkm_use_count_vat_sum"
-                android:summary="Принимать одновременно нал/б.нал. расчет"
-                android:title="Расчитывать ставку НДС"
-                app:iconSpaceReserved="false" />
+            android:defaultValue="false"
+            android:key="@string/prefs_kkm_use_count_vat_sum"
+            android:summary="Сумма НДС из документа"
+            android:title="Не расчитывать ставку НДС"
+            app:iconSpaceReserved="false" />
         <SwitchPreference
             android:defaultValue="false"
             android:key="@string/prefs_kkm_emulate"
