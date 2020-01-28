@@ -156,7 +156,7 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
         fptr.setParam(IFptr.LIBFPTR_PARAM_COMMODITY_NAME, name);
         fptr.setParam(IFptr.LIBFPTR_PARAM_PRICE, price);
         fptr.setParam(IFptr.LIBFPTR_PARAM_QUANTITY, quantity);
-        fptr.setParam(IFptr.LIBFPTR_PARAM_SUM, positionSum);
+        fptr.setParam(IFptr.LIBFPTR_PARAM_POSITION_SUM, positionSum);
         fptr.setParam(IFptr.LIBFPTR_PARAM_TAX_TYPE, taxNumber);
 
         if (recountVatSum) {
