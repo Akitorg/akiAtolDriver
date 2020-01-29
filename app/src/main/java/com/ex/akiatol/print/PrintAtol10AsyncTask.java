@@ -197,12 +197,6 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
 
         checkError(fptr.registration());
 
-        if (recountVatSum) {
-            fptr.setParam(IFptr.LIBFPTR_PARAM_TAX_TYPE, taxNumber);
-            fptr.setParam(IFptr.LIBFPTR_PARAM_TAX_SUM, taxSum);
-            fptr.receiptTax();
-        }
-
 //        if (difference != 0)
 //            registerPosition(name, Math.abs(difference), 1, Math.abs(difference),
 //                    taxNumber, chequeType, type, 0, isImport, country, decNumber);
@@ -212,13 +206,15 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
     @Override
     int getVat(double tax_sum, int tax) {
 
-        int tax_vat = IFptr.LIBFPTR_TAX_NO;
-        if (tax_sum > 0) {
+        int tax_vat;
+//        if (tax_sum > 0) {
             if (tax == 10)
                 tax_vat = IFptr.LIBFPTR_TAX_VAT10;
-            else
+            else if (tax == 20)
                 tax_vat = IFptr.LIBFPTR_TAX_VAT20;
-        }
+            else
+                tax_vat = IFptr.LIBFPTR_TAX_NO;
+//        }
 
         return tax_vat;
 
@@ -409,6 +405,32 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
                         publishProgress("Регистрация Итога...");
 //                        fptr.setParam(IFptr.LIBFPTR_PARAM_SUM, orderObject.get_sum);
 //                        checkError(fptr.receiptTotal());
+
+                        if (recountVatSum) {
+
+                            double tax20 = 0;
+                            double tax10 = 0;
+
+                            for (PrintObjects.OrderGood good: orderObject.goods) {
+                                if (good.vat == 18 || good.vat == 20) {
+                                    tax20 += good.vat_sum;
+                                } else if (good.vat == 10){
+                                    tax10 += good.vat_sum;
+                                }
+                            }
+
+                            if (tax20 > 0) {
+                                fptr.setParam(IFptr.LIBFPTR_PARAM_TAX_TYPE, IFptr.LIBFPTR_TAX_VAT20);
+                                fptr.setParam(IFptr.LIBFPTR_PARAM_TAX_SUM, tax20);
+                                fptr.receiptTax();
+                            }
+
+                            if (tax10 > 0) {
+                                fptr.setParam(IFptr.LIBFPTR_PARAM_TAX_TYPE, IFptr.LIBFPTR_TAX_VAT10);
+                                fptr.setParam(IFptr.LIBFPTR_PARAM_TAX_SUM, tax10);
+                                fptr.receiptTax();
+                            }
+                        }
 
                         publishProgress("Оплата...");
 
