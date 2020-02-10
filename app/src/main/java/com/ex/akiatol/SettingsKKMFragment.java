@@ -108,6 +108,7 @@ public class SettingsKKMFragment extends PreferenceFragmentCompat implements Sha
                 emailIntent.putExtra(Intent.EXTRA_STREAM, path);
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Логи ККМ из приложения " + getApplicationName(getContext()));
                 emailIntent.putExtra(Intent.EXTRA_TEXT, message);
+                emailIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
                 if (filelocation.exists()) {
                     startActivity(Intent.createChooser(emailIntent, "Send email..."));
