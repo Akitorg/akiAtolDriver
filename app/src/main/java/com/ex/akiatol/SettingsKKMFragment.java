@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.core.content.FileProvider;
 import androidx.preference.*;
 //import com.atol.drivers.fptr.Fptr;
 //import com.atol.drivers.fptr.IFptr;
@@ -99,7 +101,11 @@ public class SettingsKKMFragment extends PreferenceFragmentCompat implements Sha
                     filename = appPath + "/drivers9/fptr_log.txt";
 
                 File filelocation = new File(filename);
-                Uri path = Uri.fromFile(filelocation);
+                //Uri path = Uri.fromFile(filelocation);
+                Uri path = FileProvider.getUriForFile(
+                        getContext(),
+                        getContext().getApplicationContext().getPackageName() + ".provider",
+                        filelocation);
 
                 Intent emailIntent = new Intent(Intent.ACTION_SEND);
                 emailIntent.setType("vnd.android.cursor.dir/email");
