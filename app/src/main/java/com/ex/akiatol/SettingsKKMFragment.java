@@ -84,10 +84,19 @@ public class SettingsKKMFragment extends PreferenceFragmentCompat implements Sha
                 String PACKAGE_NAME = getContext().getPackageName();
 
                 String filename;
+
+                String appPath;
+                File extDir = getContext().getExternalFilesDir(null);
+                if (extDir != null){
+                    appPath = extDir.getPath();
+                } else {
+                    appPath = "android/data/" + PACKAGE_NAME;
+                }
+
                 if (isAtol10)
-                    filename = "android/data/" + PACKAGE_NAME + "/files/drivers10/logs/fptr10.log";
+                    filename = appPath + "/files/drivers10/logs/fptr10.log";
                 else
-                    filename = "android/data/" + PACKAGE_NAME + "/files/drivers9/fptr_log.txt";
+                    filename = appPath+ "/files/drivers9/fptr_log.txt";
 
                 File filelocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), filename);
                 Uri path = Uri.fromFile(filelocation);

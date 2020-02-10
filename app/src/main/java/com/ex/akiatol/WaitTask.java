@@ -7,6 +7,7 @@ package com.ex.akiatol;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.os.CountDownTimer;
 
 /**
  * Created by Alex
@@ -16,9 +17,19 @@ import android.os.AsyncTask;
 public abstract class WaitTask extends AsyncTask<String, String, String> {
 	
 	private ProgressDialog pd;
-	
+	private int timeout = 1000000;
+
+	private CountDownTimer timer;
+
 	WaitTask(ProgressDialog pd) {
 		this.pd = pd;
+
+	}
+
+	WaitTask(ProgressDialog pd, int timeout) {
+		this.pd = pd;
+		this.timeout = timeout;
+
 	}
 	
 	@Override
@@ -31,6 +42,21 @@ public abstract class WaitTask extends AsyncTask<String, String, String> {
 			pd.setMessage("Подождите...");
 			pd.show();
 		}
+
+		timer = new CountDownTimer(timeout, timeout) {
+
+			public void onTick(long millisUntilFinished) {
+				// You can monitor the progress here as well by changing the onTick() time
+			}
+
+			public void onFinish() {
+				// stop async task if not in progress
+				if (getStatus() == AsyncTask.Status.RUNNING) {
+					this.cancel();
+				}
+			}
+
+		}.start();
     } // onPreExecute
 
 	@Override
@@ -61,8 +87,10 @@ public abstract class WaitTask extends AsyncTask<String, String, String> {
 	protected final void onPostExecute(String result) {
 		if (pd != null)
 			pd.dismiss();
-		
-		onFinish( result);
+
+		timer.cancel();
+
+		onFinish(result);
 	}
 }
 //© Все права на распостранение и модификацию модуля принадлежат ООО "АКИП" (www.akitorg.ru)

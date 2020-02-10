@@ -37,6 +37,7 @@ public class KKM_Fragment extends Fragment implements View.OnClickListener {
 
     private final KKM_Information[] kkm_information = {null};
     private boolean isAtol10 = false;
+    public static int timeout = 10000;
 
     private View.OnClickListener listener = null;
     public void setOnClickListener(View.OnClickListener listener) {
@@ -103,7 +104,7 @@ public class KKM_Fragment extends Fragment implements View.OnClickListener {
         ProgressDialog pd = new ProgressDialog(getContext());
         pd.setTitle("Получение информации");
 
-        WaitTask wt = new WaitTask(pd) {
+        WaitTask wt = new WaitTask(pd, timeout) {
             @Override
             public void Run() throws Exception{
 
