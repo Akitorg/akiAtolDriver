@@ -90,13 +90,13 @@ public class SettingsKKMFragment extends PreferenceFragmentCompat implements Sha
                 if (extDir != null){
                     appPath = extDir.getPath();
                 } else {
-                    appPath = "android/data/" + PACKAGE_NAME;
+                    appPath = "android/data/" + PACKAGE_NAME + "/files";
                 }
 
                 if (isAtol10)
-                    filename = appPath + "/files/drivers10/logs/fptr10.log";
+                    filename = appPath + "/drivers10/logs/fptr10.log";
                 else
-                    filename = appPath+ "/files/drivers9/fptr_log.txt";
+                    filename = appPath + "/drivers9/fptr_log.txt";
 
                 File filelocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), filename);
                 Uri path = Uri.fromFile(filelocation);
@@ -108,7 +108,12 @@ public class SettingsKKMFragment extends PreferenceFragmentCompat implements Sha
                 emailIntent.putExtra(Intent.EXTRA_STREAM, path);
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Логи ККМ из приложения " + getApplicationName(getContext()));
                 emailIntent.putExtra(Intent.EXTRA_TEXT, message);
-                startActivity(Intent.createChooser(emailIntent , "Send email..."));
+
+                if (filelocation.exists()) {
+                    startActivity(Intent.createChooser(emailIntent, "Send email..."));
+                } else {
+                    Toast.makeText(getContext(), "Файл не найден", Toast.LENGTH_LONG).show();
+                }
 
                 return false;
             }
