@@ -98,7 +98,7 @@ public class SettingsKKMFragment extends PreferenceFragmentCompat implements Sha
                 else
                     filename = appPath + "/drivers9/fptr_log.txt";
 
-                File filelocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), filename);
+                File filelocation = new File(filename);
                 Uri path = Uri.fromFile(filelocation);
 
                 Intent emailIntent = new Intent(Intent.ACTION_SEND);
