@@ -43,6 +43,8 @@ public class PrintChequeActivity extends Activity implements PrintResponseListen
     public static void setLightTheme() { theme = R.style.AtolTheme; }
     public static int getAppTheme() { return theme; }
 
+    private static boolean isStarted = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -195,6 +197,10 @@ public class PrintChequeActivity extends Activity implements PrintResponseListen
 
     private void startPrint() {
 
+        if (isStarted) {
+            return;
+        }
+
         boolean emulate_kkm = PreferenceManager.getDefaultSharedPreferences(this)
                 .getBoolean(getString(R.string.prefs_kkm_emulate), false);
 
@@ -219,6 +225,8 @@ public class PrintChequeActivity extends Activity implements PrintResponseListen
             printTask.execute();
 
         }
+
+        isStarted = true;
 
     }
 
@@ -246,6 +254,8 @@ public class PrintChequeActivity extends Activity implements PrintResponseListen
 
         @Override
         public boolean handleMessage(Message msg) {
+
+            isStarted = false;
 
             switch (msg.what) {
 
