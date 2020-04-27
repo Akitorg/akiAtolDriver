@@ -127,10 +127,10 @@ public class SettingsKKMFragment extends PreferenceFragmentCompat implements Sha
 
         });
 
-        String user = prefs.getString(getContext().getString(R.string.prefs_user_name), "");
+        String user = PreferenceManager.getDefaultSharedPreferences(getContext()).getString("prefs_user_name", "");
         findPreference("prefs_user_name").setSummary(user);
 
-        String inn = prefs.getString(getContext().getString(R.string.prefs_user_inn), "");
+        String inn = PreferenceManager.getDefaultSharedPreferences(getContext()).getString("prefs_user_inn", "");
         findPreference("prefs_user_inn").setSummary(inn);
 
         kkm_category = ((PreferenceCategory) findPreference("pref_key_kkm_sett"));
