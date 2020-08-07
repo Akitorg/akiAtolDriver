@@ -153,6 +153,10 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
 //            difference = round(positionSum - price * quantity, 2);
 //        }
 
+        if (positionSum == 0) {
+            return;
+        }
+
         fptr.setParam(IFptr.LIBFPTR_PARAM_COMMODITY_NAME, name);
         fptr.setParam(IFptr.LIBFPTR_PARAM_PRICE, price);
         fptr.setParam(IFptr.LIBFPTR_PARAM_QUANTITY, quantity);
