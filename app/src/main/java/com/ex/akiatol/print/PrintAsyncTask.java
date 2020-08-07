@@ -110,7 +110,7 @@ public abstract class PrintAsyncTask extends AsyncTask<String, String, PrintResu
                     item.price = round(item.dsum / item.count, 2);
                 } else if (i + 2 == orderObject.goods.length) { // Предпоследняя позиция - проверим чтобы сумма уже не превышала сумму дока
                     if (positions_sum > orderObject.get_sum) {
-                        item.dsum -= round(positions_sum - orderObject.get_sum, 2) - 0.1;
+                        item.dsum -= round(positions_sum - orderObject.get_sum, 2) + 0.1;
                         item.price = round(item.dsum / item.count, 2);
                     }
                 }
