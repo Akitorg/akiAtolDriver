@@ -153,7 +153,7 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
 //            difference = round(positionSum - price * quantity, 2);
 //        }
 
-        if (positionSum == 0) {
+        if (positionSum <= 0) {
             return;
         }
 

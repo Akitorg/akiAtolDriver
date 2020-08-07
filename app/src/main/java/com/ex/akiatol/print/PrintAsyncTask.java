@@ -104,9 +104,16 @@ public abstract class PrintAsyncTask extends AsyncTask<String, String, PrintResu
 
             positions_sum += item.dsum;
 
-            if ((i + 1 == orderObject.goods.length) && (positions_sum != orderObject.get_sum && !isCombo)) { //Последняя позиция в списке - занесем на нее остаток (если нужно)
-                item.dsum += round(orderObject.get_sum - positions_sum, 2);
-                item.price = round(item.dsum / item.count, 2);
+            if ((positions_sum != orderObject.get_sum && !isCombo)) {
+                if (i + 1 == orderObject.goods.length) { //Последняя позиция в списке - занесем на нее остаток (если нужно)
+                    item.dsum += round(orderObject.get_sum - positions_sum, 2);
+                    item.price = round(item.dsum / item.count, 2);
+                } else if (i + 2 == orderObject.goods.length) { // Предпоследняя позиция - проверим чтобы сумма уже не превышала сумму дока
+                    if (positions_sum > orderObject.get_sum) {
+                        item.dsum -= round(positions_sum - orderObject.get_sum, 2) - 0.1;
+                        item.price = round(item.dsum / item.count, 2);
+                    }
+                }
             }
 
             registerPosition(item.name, item.price, item.count, item.dsum, tax_vat, item.vat_sum, recountVatSum,
