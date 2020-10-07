@@ -79,7 +79,7 @@ public abstract class PrintAsyncTask extends AsyncTask<String, String, PrintResu
             int tax_vat = getVat(item.vat_sum, item.vat);
 
             double position_sum;
-            boolean isCombo = printType == PrintType.ORDER_COMBO;
+            boolean isCombo = (printType == PrintType.ORDER_COMBO || printType == PrintType.RETORDER_COMBO);
             if (isCombo) {
                 position_sum = round(item.price * item.count, 2);
             } else {

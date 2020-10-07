@@ -367,6 +367,7 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
                 case RETORDER_CREDIT:
                 case RETORDER_OTHER:
                 case ORDER_COMBO:
+                case RETORDER_COMBO:
 
                     int checkType = IFptr.LIBFPTR_RT_SELL;
                     if (printType == RETORDER_CARD
@@ -450,7 +451,7 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
                                 registerPayment(orderObject.get_sum, IFptr.LIBFPTR_PT_PREPAID);
                             } else if (printType == ORDER_OTHER || printType == RETORDER_OTHER) {
                                 registerPayment(orderObject.get_sum, IFptr.LIBFPTR_PT_OTHER);
-                            } else if(printType == ORDER_COMBO) {
+                            } else if(printType == ORDER_COMBO || printType == RETORDER_COMBO) {
                                 registerPayment(orderObject.get_sum, IFptr.LIBFPTR_PT_CASH);
                                 registerPayment(round(orderObject.full_sum - orderObject.get_sum, 2), IFptr.LIBFPTR_PT_ELECTRONICALLY);
                             } else {

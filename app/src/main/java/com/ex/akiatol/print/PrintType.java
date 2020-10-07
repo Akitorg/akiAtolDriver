@@ -18,6 +18,7 @@ public enum PrintType implements Serializable {
     RETORDER_CREDIT,
     RETORDER_OTHER,
     ORDER_COMBO,
+    RETORDER_COMBO,
     INCOME,
     OUTCOME,
     ZREP,
