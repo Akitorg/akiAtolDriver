@@ -374,7 +374,8 @@ public class PrintAtol10AsyncTask extends PrintAsyncTask {
                             || printType == RETORDER_CASH
                             || printType == RETORDER_ADVANCE
                             || printType == RETORDER_CREDIT
-                            || printType == RETORDER_OTHER)
+                            || printType == RETORDER_OTHER
+                            || printType == RETORDER_COMBO)
 
                         checkType = IFptr.LIBFPTR_RT_SELL_RETURN;
 
